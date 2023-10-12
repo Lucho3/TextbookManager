@@ -19,6 +19,12 @@
     <Filter Include="Source Files\Helpers">
       <UniqueIdentifier>{6302b068-ed23-410c-b0a0-bea13cd07ca3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Helpers">
+      <UniqueIdentifier>{2af25de0-0c07-4ffd-9490-1a6bdb879622}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Class Definitions">
+      <UniqueIdentifier>{6d7d4a7f-158e-4131-9fe8-cc68152b8dca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TextbookManager.cpp">
@@ -33,28 +39,31 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="author.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Class Definitions</Filter>
     </ClInclude>
     <ClInclude Include="base.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Class Definitions</Filter>
     </ClInclude>
     <ClInclude Include="certificate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="distribution_owner.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Class Definitions</Filter>
     </ClInclude>
     <ClInclude Include="distribution.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Class Definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="distribution_owner.h">
+      <Filter>Header Files\Class Definitions</Filter>
     </ClInclude>
     <ClInclude Include="order.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Class Definitions</Filter>
     </ClInclude>
     <ClInclude Include="person.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Class Definitions</Filter>
     </ClInclude>
     <ClInclude Include="textbook.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Class Definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="tb_helper.h">
+      <Filter>Header Files\Helpers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

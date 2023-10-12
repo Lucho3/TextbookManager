@@ -1,6 +1,6 @@
 #include "textbook.h"
 #include <regex>
-#include "tb_helper.cpp"
+#include "tb_helper.h"
 
 Textbook::Textbook() {
 

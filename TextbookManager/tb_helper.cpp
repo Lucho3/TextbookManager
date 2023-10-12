@@ -1,4 +1,5 @@
 #include <regex>
+#include "tb_helper.h"
 
 bool isValidISBN10(const std::string& isbn) {
 	if (isbn.size() != 10) {

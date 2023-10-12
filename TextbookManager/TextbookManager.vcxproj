@@ -151,6 +151,7 @@
     <ClInclude Include="distribution_owner.h" />
     <ClInclude Include="order.h" />
     <ClInclude Include="person.h" />
+    <ClInclude Include="tb_helper.h" />
     <ClInclude Include="textbook.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
