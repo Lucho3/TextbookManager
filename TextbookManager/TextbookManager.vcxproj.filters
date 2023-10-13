@@ -36,6 +36,15 @@
     <ClCompile Include="Textbook.cpp">
       <Filter>Source Files\Class Implementations</Filter>
     </ClCompile>
+    <ClCompile Include="Certificate.cpp">
+      <Filter>Source Files\Class Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="common.cpp">
+      <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Base.cpp">
+      <Filter>Source Files\Class Implementations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="author.h">
@@ -63,6 +72,9 @@
       <Filter>Header Files\Class Definitions</Filter>
     </ClInclude>
     <ClInclude Include="tb_helper.h">
+      <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
       <Filter>Header Files\Helpers</Filter>
     </ClInclude>
   </ItemGroup>

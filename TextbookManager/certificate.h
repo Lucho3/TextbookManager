@@ -13,14 +13,15 @@ private:
 public:
 	Certificate();
 	Certificate(std::string&);
-	//TODO ~Certificate();
-	const std::string& get_name() const;
-	void set_name();
-	const std::string& get_assigner() const;
-	void set_assigner();
-	const std::string& get_date() const;
-	void set_date();
+	~Certificate();
+	const std::string& getName() const;
+	void setName();
+	const std::string& getAssigner() const;
+	void setAssigner();
+	const std::string& getDate() const;
+	void setDate();
 	std::ostream& print(std::ostream& os) const override;
 };
+
 
 #endif

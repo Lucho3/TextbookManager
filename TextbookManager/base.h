@@ -10,8 +10,4 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Base& obj);
 };
 
-std::ostream& operator<<(std::ostream& os, const Base& obj) {
-    return obj.print(os);
-}
-
 #endif

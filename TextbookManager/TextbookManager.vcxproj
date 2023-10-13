@@ -139,6 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Base.cpp" />
+    <ClCompile Include="Certificate.cpp" />
+    <ClCompile Include="common.cpp" />
     <ClCompile Include="tb_helper.cpp" />
     <ClCompile Include="Textbook.cpp" />
     <ClCompile Include="TextbookManager.cpp" />
@@ -147,6 +150,7 @@
     <ClInclude Include="author.h" />
     <ClInclude Include="base.h" />
     <ClInclude Include="certificate.h" />
+    <ClInclude Include="common.h" />
     <ClInclude Include="distribution.h" />
     <ClInclude Include="distribution_owner.h" />
     <ClInclude Include="order.h" />

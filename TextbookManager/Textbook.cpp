@@ -1,6 +1,8 @@
 #include "textbook.h"
 #include <regex>
 #include "tb_helper.h"
+#include "certificate.h"
+#include "common.h"
 
 Textbook::Textbook() {
 
@@ -12,6 +14,7 @@ Textbook::Textbook(std::string& title) :
 }
 
 Textbook::~Textbook() {
+	//TODO fix
 	this->authors.clear();
 	this->certificates.clear();
 }
@@ -64,22 +67,22 @@ void Textbook::setISBN()
 	std::cout << "Please enter the ISBN: ";
 	std::string new_ISBN;
 	int counter = 0;
-	bool (*validate_function)(const std::string&);
+	bool (*validateFunction)(const std::string&);
 	do
 	{
 		if (counter > 0)
 		std::cout << "\nPlease reenter the ISBN wrong format: ";
 		std::cin >> new_ISBN;
 		if (new_ISBN.length() == 10)
-			validate_function = isValidISBN10;
+			validateFunction = isValidISBN10;
 		else if (new_ISBN.length() == 13)
-			validate_function = isValidISBN13;
+			validateFunction = isValidISBN13;
 		else
-			validate_function = [](const std::string& str) -> bool {
+			validateFunction = [](const std::string& str) -> bool {
 			return false;
 		};
 		counter++;
-	} while (validate_function(new_ISBN));
+	} while (validateFunction(new_ISBN));
 	this->ISBN = new_ISBN;
 }
 
@@ -124,7 +127,7 @@ void Textbook::setReleaseDate() {
 	do
 	{
 		if (counter > 0)
-			std::cout << "\nPlease reenter the title wrong type: ";
+			std::cout << "\nPlease reenter the date wrong format: ";
 		std::cin >> new_date;
 		counter++;
 	} while (!isValidDate(new_date));
@@ -144,7 +147,7 @@ std::ostream& Textbook::print(std::ostream& os) const {
 	os << "Circulation: " << circulation << std::endl;
 	os << "Certificates: ";
 	for (const Certificate& certificate : certificates) {
-		os << certificate.get_name() << ", ";
+		os << certificate.getName() << ", ";
 	}
 	os << std::endl;
 	os << "Price: " << price << std::endl;
