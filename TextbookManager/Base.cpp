@@ -1,5 +1,5 @@
 #include "base.h"
 
-std::ostream& operator<<(std::ostream& os, const Base& obj) {
-    return obj.print(os);
+std::ostream& Base::operator<<(std::ostream& os) {
+    return this->print(os);
 }

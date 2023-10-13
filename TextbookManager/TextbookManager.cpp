@@ -2,9 +2,14 @@
 //
 
 #include <iostream>
+#include "certificate.h"
 
 int main()
 {
+    Certificate *c = new Certificate();
+    c->setName();
+    std::cout << c->getName();
+    delete c;
     std::cout << "Hello World!\n";
 }
 

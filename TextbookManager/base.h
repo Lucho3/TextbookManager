@@ -4,10 +4,10 @@
 #include <iostream>
 
 class Base {
-public:
+private:
     virtual std::ostream& print(std::ostream& os) const = 0;
-
-    friend std::ostream& operator<<(std::ostream& os, const Base& obj);
+public:
+    std::ostream& operator<<(std::ostream& os);
 };
 
 #endif
