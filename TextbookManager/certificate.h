@@ -13,7 +13,7 @@ private:
 public:
 	Certificate();
 	Certificate(std::string&);
-	~Certificate();
+	//TODO ~Certificate();
 	const std::string& get_name() const;
 	void set_name();
 	const std::string& get_assigner() const;

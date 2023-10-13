@@ -16,20 +16,20 @@ Textbook::~Textbook() {
 	this->certificates.clear();
 }
 
-const std::string& Textbook::get_title() const {
+const std::string& Textbook::getTitle() const {
 	return this->title;
 }
 
-void Textbook::set_title() {
+void Textbook::setTitle() {
+	std::cin.clear();
+	std::cin.ignore(100, '\n');
 	std::cout << "Please enter the title: ";
 	std::string new_title;
 	int counter = 0;
 	do
 	{
 		if (counter > 0)
-			std::cin.clear();
-		std::cin.ignore(100, '\n');
-		std::cout << "Please reenter the title wrong type: ";
+		std::cout << "\nPlease reenter the title wrong type: ";
 		std::cin >> new_title;
 		counter++;
 	} while (new_title.empty());
@@ -38,26 +38,29 @@ void Textbook::set_title() {
 
 //TODO: authors to do 
 
-const int Textbook::get_issue() const {
+const int Textbook::getIssue() const {
 	return this->issue;
 }
 
-void Textbook::set_issue() {
+void Textbook::setIssue() {
+	std::cin.clear();
+	std::cin.ignore(100, '\n');
 	std::cout << "Please enter the issue: ";
 	while (!(std::cin >> this->issue));
 	{
-		std::cin.clear();
-		std::cin.ignore(100, '\n');
-		std::cout << "Please reenter the issue wrong type: ";
+		std::cout << "\nPlease reenter the issue wrong type: ";
 	}
 }
 
 
-const std::string& Textbook::get_ISBN() const {
+const std::string& Textbook::getISBN() const {
 	return this->ISBN;
 }
 
-void Textbook::set_ISBN() {
+void Textbook::setISBN() 
+{
+    std::cin.clear();
+    std::cin.ignore(100, '\n');
 	std::cout << "Please enter the ISBN: ";
 	std::string new_ISBN;
 	int counter = 0;
@@ -65,9 +68,7 @@ void Textbook::set_ISBN() {
 	do
 	{
 		if (counter > 0)
-			std::cin.clear();
-		std::cin.ignore(100, '\n');
-		std::cout << "Please reenter the ISBN wrong format: ";
+		std::cout << "\nPlease reenter the ISBN wrong format: ";
 		std::cin >> new_ISBN;
 		if (new_ISBN.length() == 10)
 			validate_function = isValidISBN10;
@@ -82,32 +83,52 @@ void Textbook::set_ISBN() {
 	this->ISBN = new_ISBN;
 }
 
-const int Textbook::get_circulation() const {
+const int Textbook::getCirculation() const {
 	return this->circulation;
 }
 
-void Textbook::set_circulation() {
+void Textbook::setCirculation() {
+	std::cin.clear();
+	std::cin.ignore(100, '\n');
 	std::cout << "Please enter the circulation: ";
 	while (!(std::cin >> this->circulation));
 	{
-		std::cin.clear();
-		std::cin.ignore(100, '\n');
-		std::cout << "Please reenter the circulation wrong type: ";
+		std::cout << "\nPlease reenter the circulation wrong type: ";
 	}
 }
 
-const double Textbook::get_price() const {
+const double Textbook::getPrice() const {
 	return this->price;
 }
 
-void Textbook::set_price() {
+void Textbook::setPrice() {
+	std::cin.clear();
+	std::cin.ignore(100, '\n');
 	std::cout << "Please enter the price: ";
 	while (!(std::cin >> this->price) || this->price <= 0);
 	{
-		std::cin.clear();
-		std::cin.ignore(100, '\n');
-		std::cout << "Please reenter the price wrong type: ";
+		std::cout << "\nPlease reenter the price wrong type: ";
 	}
+}
+
+const std::string& Textbook::getReleaseDate() const {
+	return this->release_date;
+}
+
+void Textbook::setReleaseDate() {
+	std::cin.clear();
+	std::cin.ignore(100, '\n');
+	std::cout << "Please enter the release date in format DD:MM:YYYY: ";
+	std::string new_date;
+	int counter = 0;
+	do
+	{
+		if (counter > 0)
+			std::cout << "\nPlease reenter the title wrong type: ";
+		std::cin >> new_date;
+		counter++;
+	} while (!isValidDate(new_date));
+	this->release_date = new_date;
 }
 
 std::ostream& Textbook::print(std::ostream& os) const {

@@ -12,7 +12,7 @@ private:
 public:
     Author();
     Author(const std::string& name, const std::string& guild);
-    ~Author();
+    //TODO ~Author();
     const std::string& get_guild() const;
     const int get_number_of_tb_published() const;
     void set_guild();

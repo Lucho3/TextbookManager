@@ -5,5 +5,6 @@
 
 bool isValidISBN10(const std::string& isbn);
 bool isValidISBN13(const std::string& isbn);
+bool isValidDate(const std::string& dateStr);
 
 #endif

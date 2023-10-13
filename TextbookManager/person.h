@@ -14,7 +14,7 @@ private:
 public:
     Person();
     Person(const std::string& name, int age, const std::string& gender);
-    ~Person();
+    //TODO ~Person();
     const std::string& get_name() const;
     const int get_age() const;
     const std::string& get_gender() const;
