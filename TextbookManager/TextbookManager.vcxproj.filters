@@ -45,6 +45,12 @@
     <ClCompile Include="Base.cpp">
       <Filter>Source Files\Class Implementations</Filter>
     </ClCompile>
+    <ClCompile Include="DistributionOwner.cpp">
+      <Filter>Source Files\Class Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="Person.cpp">
+      <Filter>Source Files\Class Implementations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="author.h">

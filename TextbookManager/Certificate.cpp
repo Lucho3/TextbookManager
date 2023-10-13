@@ -22,8 +22,7 @@ void Certificate::setName() {
 	std::cout << "Please enter the name of the certificate: ";
 	std::string new_name;
 	int counter = 0;
-	do
-	{
+	do {
 		if (counter > 0) {
 			std::system("cls");
 			std::cout << "The name should not be empty: ";
@@ -44,8 +43,7 @@ void Certificate::setAssigner() {
 	std::cout << "Please enter the name of the company assigner: ";
 	std::string new_assigner;
 	int counter = 0;
-	do
-	{
+	do {
 		if (counter > 0) {
 			std::system("cls");
 			std::cout << "\nThe name should not be empty: ";
@@ -65,8 +63,7 @@ void Certificate::setDate() {
 	std::cout << "Please enter the date in format DD:MM:YYYY: ";
 	std::string new_date;
 	int counter = 0;
-	do
-	{
+	do {
 		if (counter > 0) {
 			std::system("cls");
 			std::cout << "\nPlease reenter the date wrong format: ";

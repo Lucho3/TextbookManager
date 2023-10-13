@@ -13,10 +13,10 @@ public:
     DistributionOwner();
     DistributionOwner(const std::string& name, double salary);
     ~DistributionOwner();
-    const double get_salary() const;
-    const int get_days_owner() const;
-    void set_days_owner();
-    void set_salary();
+    const double getSalary() const;
+    const int getDaysOwner() const;
+    void setDaysOwner();
+    void setSalary();
     std::ostream& print(std::ostream& os) const override;
 };
 

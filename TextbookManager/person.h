@@ -12,19 +12,13 @@ private:
     std::string gender;
 
 public:
-    Person();
     Person(const std::string& name, int age, const std::string& gender);
-    //TODO ~Person();
-    const std::string& get_name() const;
-    const int get_age() const;
-    const std::string& get_gender() const;
-    void set_name();
-    void set_age();
-    void set_gender();
-};
-
-class person
-{
+    const std::string& getName() const;
+    const int getAge() const;
+    const std::string& getGender() const;
+    void setName();
+    void setAge();
+    void setGender();
 };
 
 #endif
