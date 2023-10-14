@@ -2,13 +2,13 @@
 //
 
 #include <iostream>
-#include "certificate.h"
+#include "textbook.h"
 
 int main()
 {
-    Certificate *c = new Certificate();
-    c->setName();
-    std::cout << c->getName();
+    Textbook *c = new Textbook();
+    c->setIssue();
+    std::cout << c->getIssue();
     delete c;
     std::cout << "Hello World!\n";
 }

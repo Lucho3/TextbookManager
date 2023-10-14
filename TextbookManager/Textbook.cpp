@@ -47,11 +47,17 @@ const int Textbook::getIssue() const {
 
 void Textbook::setIssue() {
 	std::system("cls");
+	std::string input;
 	std::cout << "Please enter the issue: ";
-	while (!(std::cin >> this->issue)) {
-		std::system("cls");
-		std::cout << "Please reenter the issue wrong type: ";
-	}
+	int counter=0;
+	do {
+		if (counter > 0) {
+			std::system("cls");
+			std::cout << "Please reenter the issue wrong type: ";
+		}
+		getline(std::cin, input);
+		counter++;
+	} while (!(tryParseInt(input, this->issue)));
 }
 
 
@@ -92,10 +98,16 @@ const int Textbook::getCirculation() const {
 void Textbook::setCirculation() {
 	std::system("cls");
 	std::cout << "Please enter the circulation: ";
-	while (!(std::cin >> this->circulation)) {
-		std::system("cls");
-		std::cout << "Please reenter the circulation wrong type: ";
-	}
+	std::string input;
+	int counter = 0;
+	do {
+		if (counter > 0) {
+			std::system("cls");
+			std::cout << "Please reenter the circulation wrong type: ";
+		}
+		getline(std::cin, input);
+		counter++;
+	} while (!(tryParseInt(input, this->circulation)));
 }
 
 const double Textbook::getPrice() const {
@@ -105,10 +117,16 @@ const double Textbook::getPrice() const {
 void Textbook::setPrice() {
 	std::system("cls");
 	std::cout << "Please enter the price: ";
-	while (!(std::cin >> this->price) || this->price <= 0) {
-		std::system("cls");
-		std::cout << "Please reenter the price wrong type: ";
-	}
+	std::string input;
+	int counter = 0;
+	do {
+		if (counter > 0) {
+			std::system("cls");
+			std::cout << "Please reenter the price wrong type: ";
+		}
+		getline(std::cin, input);
+		counter++;
+	} while (!(tryParseDouble(input, this->price)));
 }
 
 const std::string& Textbook::getReleaseDate() const {
@@ -123,7 +141,7 @@ void Textbook::setReleaseDate() {
 	do {
 		if (counter > 0) { 
 			std::system("cls");
-			std::cout << "\nPlease reenter the date wrong format: ";
+			std::cout << "Please reenter the date wrong format: ";
 		}
 		std::getline(std::cin, new_date);
 		counter++;

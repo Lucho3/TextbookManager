@@ -32,3 +32,29 @@ bool isValidDate(const std::string& dateStr) {
 
 	return formattedDateStr == dateStr;
 }
+
+bool tryParseInt(const std::string& str, int& result) {
+	try {
+		result = std::stoi(str);
+		return true;
+	}
+	catch (const std::invalid_argument& e) {
+		return false;
+	}
+	catch (const std::out_of_range& e) {
+		return false;
+	}
+}
+
+bool tryParseDouble(const std::string& str, double& result) {
+	try {
+		result = std::stod(str);
+		return true;
+	}
+	catch (const std::invalid_argument& e) {
+		return false;
+	}
+	catch (const std::out_of_range& e) {
+		return false;
+	}
+}

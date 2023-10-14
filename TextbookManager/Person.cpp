@@ -1,4 +1,5 @@
 #include "person.h"
+#include "common.h"
 
 Person::Person(const std::string& name, int age, const std::string& gender)
     : name(name), age(age), gender(gender) {
@@ -35,10 +36,16 @@ const int Person::getAge() const {
 void Person::setAge() {
 	std::system("cls");
 	std::cout << "Please enter the age: ";
-	while (!(std::cin >> this->age) || this->age < 0) {
-		std::system("cls");
-		std::cout << "Please reenter the age wrong value: ";
-	}
+	std::string input;
+	int counter = 0;
+	do {
+		if (counter > 0) {
+			std::system("cls");
+			std::cout << "Please reenter the age wrong value: ";
+		}
+		getline(std::cin, input);
+		counter++;
+	} while (!(tryParseInt(input, this->age)));
 }
 
 const std::string& Person::getGender() const {
