@@ -9,7 +9,7 @@
 class Order : public Base {
 private:
     std::string date;
-    std::vector<Textbook> available_textbooks;
+    std::vector<Textbook> textbooks_to_buy;
     Distribution distributor;
     double final_price;
 
@@ -23,11 +23,10 @@ public:
     void set_distributor(const Distribution&);
     const double get_final_price() const;
     void set_final_price(double price);
+    std::vector<Textbook>& get_textbooks_to_buy
     double calculate_final_price();
     void add_text_book_to_order();
     std::ostream& print(std::ostream& os) const override;
 };
 
 #endif
-#pragma once
-#pragma once

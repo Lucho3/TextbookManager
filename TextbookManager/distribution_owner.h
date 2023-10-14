@@ -11,7 +11,7 @@ private:
 
 public:
     DistributionOwner();
-    DistributionOwner(const std::string& name, double salary);
+    DistributionOwner(const std::string& name, int age, const std::string& gender, double salary);
     ~DistributionOwner();
     const double getSalary() const;
     const int getDaysOwner() const;

@@ -12,7 +12,9 @@ private:
     std::string gender;
 
 public:
+    Person();
     Person(const std::string& name, int age, const std::string& gender);
+    ~Person();
     const std::string& getName() const;
     const int getAge() const;
     const std::string& getGender() const;

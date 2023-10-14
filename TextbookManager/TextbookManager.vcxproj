@@ -139,9 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Author.cpp" />
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="Certificate.cpp" />
     <ClCompile Include="common.cpp" />
+    <ClCompile Include="Distribution.cpp" />
     <ClCompile Include="DistributionOwner.cpp" />
     <ClCompile Include="Person.cpp" />
     <ClCompile Include="tb_helper.cpp" />

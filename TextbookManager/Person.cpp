@@ -1,9 +1,17 @@
 #include "person.h"
 #include "common.h"
 
+Person::Person() {
+
+}
+
 Person::Person(const std::string& name, int age, const std::string& gender)
     : name(name), age(age), gender(gender) {
     
+}
+
+Person::~Person() {
+
 }
 
 const std::string& Person::getName() const {

@@ -11,12 +11,12 @@ private:
 
 public:
     Author();
-    Author(const std::string& name, const std::string& guild);
-    //TODO ~Author();
-    const std::string& get_guild() const;
-    const int get_number_of_tb_published() const;
-    void set_guild();
-    void set_number_of_tb_published();
+    Author(const std::string& name, int age, const std::string& gender, const std::string& guild);
+    ~Author();
+    const std::string& getGuild() const;
+    const int getNumberOfTbPublished() const;
+    void setGuild();
+    void setNumberOfTbPublished();
     std::ostream& print(std::ostream& os) const override;
 };
 

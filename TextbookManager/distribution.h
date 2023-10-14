@@ -18,15 +18,15 @@ public:
     Distribution();
     Distribution(const std::string& name, const DistributionOwner& owner);
     ~Distribution();
-    const std::string& get_address() const;
-    const std::string& get_phone_number() const;
-    DistributionOwner& get_owner();
-    void set_name();
-    void set_address();
-    void set_phone_number();
-    void set_owner(const DistributionOwner&);
-    std::vector<Textbook>& get_available_textbooks();
-    void set_available_textbooks();
+    const std::string& getAddress() const;
+    const std::string& getPhoneNumber() const;
+    DistributionOwner& getOwner();
+    void setName();
+    void setAddress();
+    void setPhoneNumber();
+    void setOwner(const DistributionOwner&);
+    std::vector<Textbook>& getAvailableTextbooks();
+    void setAvailableTextbooks();
     std::ostream& print(std::ostream& os) const override;
 };
 
