@@ -18,7 +18,7 @@ private:
 	std::vector<Certificate*> certificates;
 	double price;
 public:
-	Textbook(std::vector<Author*>&, std::vector<Certificate*>&);
+	Textbook(std::vector<Author*>&);
 	Textbook(std::string&);
 	~Textbook();
 	const std::string& getTitle() const;
@@ -34,7 +34,7 @@ public:
 	const int getCirculation() const;
 	void setCirculation();
 	std::vector<Certificate*>& getCertificates();
-	void setCertificates(std::vector<Certificate*>&);
+	void setCertificate();
 	const double getPrice() const;
 	void setPrice();
 	std::ostream& print(std::ostream& os) const override;

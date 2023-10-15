@@ -63,6 +63,12 @@
     <ClCompile Include="Order.cpp">
       <Filter>Source Files\Class Implementations</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\Class Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Source Files\Class Implementations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="author.h">
@@ -97,6 +103,12 @@
     </ClInclude>
     <ClInclude Include="dis_helper.h">
       <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Header Files\Class Definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="controller.h">
+      <Filter>Header Files\Class Definitions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

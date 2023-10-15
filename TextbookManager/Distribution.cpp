@@ -20,6 +20,7 @@ Distribution::~Distribution() {
         delete tb;
     }
     this->available_textbooks.clear();
+    delete this->owner;
 }
 
 const std::string& Distribution::getAddress() const {
@@ -70,10 +71,10 @@ void Distribution::setOwner(std::vector<DistributionOwner*>& list_of_owners) {
     std::system("cls");
     int len_of_cert = list_of_owners.size();
     if (len_of_cert) {
-        for (int i = 0; i < len_of_cert - 1; ++i) {
-            std::cout << i << ": " << list_of_owners[i];
+        for (int i = 0; i < len_of_cert ; ++i) {
+            std::cout << i << ": " << *list_of_owners[i];
         }
-        std::cout << "\nEnter the indexes of the owner that you want: ";
+        std::cout << "Enter the index of the owner that you want: ";
         std::string input;
         int index;
         int counter = 0;
@@ -102,8 +103,8 @@ void Distribution::setAvailableTextbooks(std::vector<Textbook*>& list_of_tbs) {
     std::system("cls");
     int len_of_cert = list_of_tbs.size();
     if (len_of_cert) {
-        for (int i = 0; i < len_of_cert - 1; ++i) {
-            std::cout << i << ": " << list_of_tbs[i];
+        for (int i = 0; i < len_of_cert; ++i) {
+            std::cout << i << ": " << list_of_tbs[i]->getTitle();
         }
         std::cout << "\nEnter the indexes of the TB that you want separated by ', ': ";
         std::string input;
@@ -135,15 +136,15 @@ void Distribution::setName() {
         getline(std::cin, new_name);
         counter++;
     } while (new_name.empty());
+    this->name = new_name;
 }
 
 std::ostream& Distribution::print(std::ostream& os) const {
-    os << "Name: " << name << ", Address: " << address << ", Phone Number: " << phone_number << std::endl;
-    os << "Distribution Owner: ";
-    owner->print(os);
+    os << "Name: " << name << ", Address: " << address << ", Phone Number: " << phone_number 
+       << ", Distribution Owner: " << this->owner->getName() << std::endl;
     os << "\nAvailable Textbooks: ";
-    for (const Textbook* textbook : available_textbooks) {
-        os << "\n- ";
+
+    for (const Textbook* textbook : available_textbooks) {;
         textbook->print(os);
     }
     return os;

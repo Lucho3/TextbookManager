@@ -56,6 +56,6 @@ void DistributionOwner::setDaysOwner() {
 }
 
 std::ostream& DistributionOwner::print(std::ostream& os) const {
-    os << ", Salary: " << salary << ", Days Owner: " << days_owner;
+	os << "Name: " << this->getName() << ", Days Owner: " << this->days_owner << std::endl;
 	return os;
 }

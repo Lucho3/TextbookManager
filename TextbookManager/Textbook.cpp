@@ -5,7 +5,7 @@
 #include "certificate.h"
 #include "common.h"
 
-Textbook::Textbook(std::vector<Author*>& authors, std::vector<Certificate*>& certificates) {
+Textbook::Textbook(std::vector<Author*>& authors) {
 	this->setTitle();
 	this->setReleaseDate();
 	this->setPrice();
@@ -13,7 +13,6 @@ Textbook::Textbook(std::vector<Author*>& authors, std::vector<Certificate*>& cer
 	this->setISBN();
 	this->setCirculation();
 	this->setAuthors(authors);
-	this->setCertificates(certificates);
 }
 
 Textbook::Textbook(std::string& title) :
@@ -168,12 +167,13 @@ std::vector<Author*>& Textbook::getAuthors() {
 
 void Textbook::setAuthors(std::vector<Author*>& authors) {
 	//really raw should be fixed prob
+	std::system("cls");
 	int len_of_cert = authors.size();
 	if (len_of_cert) {
-		for (int i = 0; i < len_of_cert - 1; ++i) {
-			std::cout << i << ": " << authors[i];
+		for (int i = 0; i < len_of_cert; ++i) {
+			std::cout << i << ": " << authors[i]->getName() << " Guild: " << authors[i]->getGuild() << std::endl;
 		}
-		std::cout << "\nEnter the indexes of the authors that you want separated by ', ': ";
+		std::cout << "Enter the indexes of the authors that you want separated by ', ': ";
 		std::string input;
 		std::getline(std::cin, input);
 		std::vector<int> indexes;
@@ -194,28 +194,9 @@ std::vector<Certificate*>& Textbook::getCertificates() {
 	return this->certificates;
 }
 
-void Textbook::setCertificates(std::vector<Certificate*>& certificates) {
-	//really raw should be fixed prob
-	int len_of_cert = certificates.size();
-	if (len_of_cert) {
-		for (int i = 0; i < len_of_cert - 1; ++i) {
-			std::cout << i << ": " << authors[i];
-		}
-		std::cout << "\nEnter the indexes of the cerificates that you want separated by ', ': ";
-		std::string input;
-		std::getline(std::cin, input);
-		std::vector<int> indexes;
-		std::string token;
-		std::stringstream ss(input);
-		while (std::getline(ss, token, ',')) {
-			int number = std::stoi(token);
-			indexes.push_back(number);
-		}
-
-		for (int index : indexes) {
-			this->certificates.push_back(certificates[index]);
-		}
-	}
+void Textbook::setCertificate() {
+	//On theory we need another class that holds the reference between the certificate and TB or a map in the TB
+	this->certificates.push_back(new Certificate());
 }
 
 std::ostream& Textbook::print(std::ostream& os) const {

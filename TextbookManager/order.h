@@ -18,12 +18,12 @@ public:
     ~Order();
     const std::string& getDate() const;
     void setDate();
-    Distribution* getDistributor();
-    void setDistributor(std::vector<Distribution*>& list_of_distributions);
+    Distribution* getDistribution();
+    void setDistribution(std::vector<Distribution*>& list_of_distributions);
     const double getFinalPrice() const;
     std::vector<Textbook*>& getTextbooksToBuy();
     void calculateFinalPrice();
-    void addTextBooksToOrder(std::vector<Textbook*>& list_of_tbs);
+    void addTextbooksToOrder(std::vector<Textbook*>& list_of_tbs);
     std::ostream& print(std::ostream& os) const override;
 };
 

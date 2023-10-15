@@ -3,12 +3,12 @@
 
 #include <iostream>
 #include "textbook.h"
+#include "menu.h"
 
 int main()
 {
-    Certificate *c = new Certificate();
-    std::cout << *c;
-    delete c;
+    Menu* mm = new Menu();
+    delete mm;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

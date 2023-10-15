@@ -7,11 +7,15 @@
 Order::Order(std::vector<Distribution*>& list_of_distributions)
     : final_price(0.0) {
     this->setDate();
-    this->setDistributor(list_of_distributions);
+    this->setDistribution(list_of_distributions);
 }
 
 Order::~Order() {
-    // Destructor
+    delete this->distribution;
+    for (Textbook* tb : this->textbooks_to_buy) {
+        delete tb;
+    }
+
 }
 
 const std::string& Order::getDate() const {
@@ -34,31 +38,21 @@ void Order::setDate() {
     this->date = new_date;
 }
 
-Distribution* Order::getDistributor() {
+Distribution* Order::getDistribution() {
     return this->distribution;
 }
 
-void Order::setDistributor(std::vector<Distribution*>& list_of_distributions) {
+void Order::setDistribution(std::vector<Distribution*>& list_of_distributions) {
     //really raw should be fixed prob
     std::system("cls");
     int len_of_cert = list_of_distributions.size();
     if (len_of_cert) {
-        for (int i = 0; i < len_of_cert - 1; ++i) {
-            std::cout << i << ": " << list_of_distributions[i];
+        for (int i = 0; i < len_of_cert; ++i) {
+            std::cout << "\nIndex: " << i ;
+            std::cout <<  list_of_distributions[i]->getName();
         }
-        std::cout << "\nEnter the index of the distributor that you want: ";
-        std::string input;
-        int index;
-        int counter = 0;
-        do {
-            if (counter > 0) {
-                std::system("cls");
-                std::cout << "Please reenter the index wrong value: ";
-            }
-            getline(std::cin, input);
-            counter++;
-        } while (!(tryParseInt(input, index)));
-        this->distribution = list_of_distributions[index];
+
+        this->distribution = list_of_distributions[setInt("the index of the distribution that you want")];
     }
 }
 
@@ -78,15 +72,17 @@ void Order::calculateFinalPrice() {
    }
 }
 
-void Order::addTextBooksToOrder(std::vector<Textbook*>& list_of_tbs) {
+void Order::addTextbooksToOrder(std::vector<Textbook*>& list_of_tbs) {
     //really raw should be fixed prob
     std::system("cls");
     int len_of_cert = list_of_tbs.size();
     if (len_of_cert) {
-        for (int i = 0; i < len_of_cert - 1; ++i) {
-            std::cout << i << ": " << list_of_tbs[i];
+
+        for (int i = 0; i < len_of_cert; ++i) {
+            std::cout << "Index: " << i << std::endl;
+            std::cout << *list_of_tbs[i];
         }
-        std::cout << "\nEnter the indexes of the TB that you want separated by ', ': ";
+        std::cout << "Enter the indexes of the TB that you want separated by ', ': ";
         std::string input;
         std::getline(std::cin, input);
         std::vector<int> indexes;
@@ -105,13 +101,10 @@ void Order::addTextBooksToOrder(std::vector<Textbook*>& list_of_tbs) {
 
 std::ostream& Order::print(std::ostream& os) const {
     os << "Order Date: " << date << std::endl;
-    os << "Distribution Information: ";
-    distribution->print(os);
-    os << "\nTextbooks to Buy: ";
+    os << "Distribution Name: " << this->distribution->getName() << std::endl;
+    os << "\nTextbooks: ";
     for (Textbook* textbook : textbooks_to_buy) {
-        os << "\n- ";
-        textbook->print(os);
+        os << textbook->getTitle();
     }
-    os << "\nFinal Price: " << final_price << std::endl;
     return os;
 }

@@ -60,10 +60,6 @@ void Author::setNumberOfTbPublished() {
 
 std::ostream& Author::print(std::ostream& os) const {
 	std::system("cls");
-	os << "Name: " << this->getName() << std::endl;
-	os << "Gender: " << this->getGender() << std::endl;
-	os << "Age: " << this->getAge() << std::endl;
-	os << "Guild: " << this->guild << std::endl;
-	os << "Number Of TB Published: " << this->number_of_tb_published << std::endl;
+	os << "Name: " << this->getName()  << ", Guild: " << this->guild << std::endl;
 	return os;
 }

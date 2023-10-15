@@ -1,5 +1,6 @@
 #include "common.h"
 #include <sstream>
+#include <iostream>
 
 
 bool checkDelimiter(std::istream& stream, char expectedDelimiter) {
@@ -10,7 +11,7 @@ bool checkDelimiter(std::istream& stream, char expectedDelimiter) {
 	return true;
 }
 
-bool isValidDate(const std::string& dateStr) {
+bool isValidDate(std::string& dateStr) {
 	int day, month, year;
 	char delimiter;
 	std::istringstream date_stream(dateStr);
@@ -26,11 +27,11 @@ bool isValidDate(const std::string& dateStr) {
 		return false;
 	}
 
-	std::string formattedDateStr = (day < 10 ? "0" : "") + std::to_string(day) + ":" +
+	dateStr = (day < 10 ? "0" : "") + std::to_string(day) + ":" +
 		(month < 10 ? "0" : "") + std::to_string(month) + ":" +
 		std::to_string(year);
 
-	return formattedDateStr == dateStr;
+	return true;
 }
 
 bool tryParseInt(const std::string& str, int& result) {
@@ -57,4 +58,21 @@ bool tryParseDouble(const std::string& str, double& result) {
 	catch (const std::out_of_range& e) {
 		return false;
 	}
+}
+
+int setInt(const std::string& prompt) {
+	std::cout << "Enter " << prompt <<": ";
+	std::string option;
+	int counter = 0;
+	int chosen;
+	do {
+		if (counter > 0) {
+			std::system("cls");
+			std::cout << "Please reenter" << prompt << ": ";
+		}
+		getline(std::cin, option);
+		counter++;
+	} while (!(tryParseInt(option, chosen)));
+
+	return chosen;
 }

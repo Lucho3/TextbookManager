@@ -78,8 +78,6 @@ void Certificate::setDate() {
 
 std::ostream& Certificate::print(std::ostream& os) const {
 	std::system("cls");
-	os << "Certificate Name: " << name << "\n";
-	os << "Assigner: " << assigner << "\n";
-	os << "Date Earned: " << date_earned << "\n";
+	os << "Certificate Name: " << this->name << ", Date Earned:: " << this->date_earned << std::endl;
 	return os;
 }
