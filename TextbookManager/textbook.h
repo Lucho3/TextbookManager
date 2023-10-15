@@ -10,21 +10,21 @@
 class Textbook : public Base {
 private:
 	std::string title;
-	std::vector<Author> authors;
+	std::vector<Author*> authors;
 	int issue;
 	std::string ISBN;
 	std::string release_date;
 	int circulation;
-	std::vector<Certificate> certificates;
+	std::vector<Certificate*> certificates;
 	double price;
 public:
-	Textbook();
+	Textbook(std::vector<Author*>&, std::vector<Certificate*>&);
 	Textbook(std::string&);
 	~Textbook();
 	const std::string& getTitle() const;
 	void setTitle();
-	std::vector<Author>& getAuthors();
-	void setAuthors();
+	std::vector<Author*>& getAuthors();
+	void setAuthors(std::vector<Author*>& authors);
 	const int getIssue() const;
 	void setIssue();
 	const std::string& getISBN() const;
@@ -33,8 +33,8 @@ public:
 	void setReleaseDate();
 	const int getCirculation() const;
 	void setCirculation();
-	std::vector<Certificate>& getCertificates();
-	void setCertificates();
+	std::vector<Certificate*>& getCertificates();
+	void setCertificates(std::vector<Certificate*>&);
 	const double getPrice() const;
 	void setPrice();
 	std::ostream& print(std::ostream& os) const override;

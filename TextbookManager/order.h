@@ -9,23 +9,21 @@
 class Order : public Base {
 private:
     std::string date;
-    std::vector<Textbook> textbooks_to_buy;
-    Distribution distributor;
+    std::vector<Textbook*> textbooks_to_buy;
+    Distribution* distribution;
     double final_price;
 
 public:
-    Order();
-    Order(const std::string& date, const Distribution& distributor);
+    Order(std::vector<Distribution*>& list_of_distributions);
     ~Order();
-    const std::string& get_date() const;
-    void set_date();
-    Distribution& get_distributor();
-    void set_distributor(const Distribution&);
-    const double get_final_price() const;
-    void set_final_price(double price);
-    std::vector<Textbook>& get_textbooks_to_buy
-    double calculate_final_price();
-    void add_text_book_to_order();
+    const std::string& getDate() const;
+    void setDate();
+    Distribution* getDistributor();
+    void setDistributor(std::vector<Distribution*>& list_of_distributions);
+    const double getFinalPrice() const;
+    std::vector<Textbook*>& getTextbooksToBuy();
+    void calculateFinalPrice();
+    void addTextBooksToOrder(std::vector<Textbook*>& list_of_tbs);
     std::ostream& print(std::ostream& os) const override;
 };
 

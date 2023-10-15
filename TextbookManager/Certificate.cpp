@@ -2,7 +2,9 @@
 #include "common.h"
 
 Certificate::Certificate() {
-
+	this->setName();
+	this->setAssigner();
+	this->setDate();
 }
 
 Certificate::Certificate(std::string& name) :
@@ -75,6 +77,7 @@ void Certificate::setDate() {
 }
 
 std::ostream& Certificate::print(std::ostream& os) const {
+	std::system("cls");
 	os << "Certificate Name: " << name << "\n";
 	os << "Assigner: " << assigner << "\n";
 	os << "Date Earned: " << date_earned << "\n";

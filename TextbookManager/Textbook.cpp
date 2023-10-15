@@ -1,11 +1,19 @@
 #include "textbook.h"
 #include <regex>
+#include <sstream>
 #include "tb_helper.h"
 #include "certificate.h"
 #include "common.h"
 
-Textbook::Textbook() {
-
+Textbook::Textbook(std::vector<Author*>& authors, std::vector<Certificate*>& certificates) {
+	this->setTitle();
+	this->setReleaseDate();
+	this->setPrice();
+	this->setIssue();
+	this->setISBN();
+	this->setCirculation();
+	this->setAuthors(authors);
+	this->setCertificates(certificates);
 }
 
 Textbook::Textbook(std::string& title) :
@@ -14,8 +22,13 @@ Textbook::Textbook(std::string& title) :
 }
 
 Textbook::~Textbook() {
-	//TODO fix
+	for (Author* a : this->authors) {
+		delete a;
+	}
 	this->authors.clear();
+	for (Certificate* c : this->certificates) {
+		delete c;
+	}
 	this->certificates.clear();
 }
 
@@ -149,11 +162,67 @@ void Textbook::setReleaseDate() {
 	this->release_date = new_date;
 }
 
+std::vector<Author*>& Textbook::getAuthors() {
+	return this->authors;
+}
+
+void Textbook::setAuthors(std::vector<Author*>& authors) {
+	//really raw should be fixed prob
+	int len_of_cert = authors.size();
+	if (len_of_cert) {
+		for (int i = 0; i < len_of_cert - 1; ++i) {
+			std::cout << i << ": " << authors[i];
+		}
+		std::cout << "\nEnter the indexes of the authors that you want separated by ', ': ";
+		std::string input;
+		std::getline(std::cin, input);
+		std::vector<int> indexes;
+		std::string token;
+		std::stringstream ss(input);
+		while (std::getline(ss, token, ',')) {
+			int number = std::stoi(token);
+			indexes.push_back(number);
+		}
+
+		for (int index : indexes) {
+			this->authors.push_back(authors[index]);
+		}
+	}
+}
+
+std::vector<Certificate*>& Textbook::getCertificates() {
+	return this->certificates;
+}
+
+void Textbook::setCertificates(std::vector<Certificate*>& certificates) {
+	//really raw should be fixed prob
+	int len_of_cert = certificates.size();
+	if (len_of_cert) {
+		for (int i = 0; i < len_of_cert - 1; ++i) {
+			std::cout << i << ": " << authors[i];
+		}
+		std::cout << "\nEnter the indexes of the cerificates that you want separated by ', ': ";
+		std::string input;
+		std::getline(std::cin, input);
+		std::vector<int> indexes;
+		std::string token;
+		std::stringstream ss(input);
+		while (std::getline(ss, token, ',')) {
+			int number = std::stoi(token);
+			indexes.push_back(number);
+		}
+
+		for (int index : indexes) {
+			this->certificates.push_back(certificates[index]);
+		}
+	}
+}
+
 std::ostream& Textbook::print(std::ostream& os) const {
 	os << "Title: " << title << std::endl;
 	os << "Authors: ";
-	for (const Author& author : authors) {
-		//os << author.get_name() << ", ";
+	for (const Author* author : authors) {
+		os << author->getName() << ", ";
 	}
 	os << std::endl;
 	os << "Issue: " << issue << std::endl;
@@ -161,8 +230,8 @@ std::ostream& Textbook::print(std::ostream& os) const {
 	os << "Release Date: " << release_date << std::endl;
 	os << "Circulation: " << circulation << std::endl;
 	os << "Certificates: ";
-	for (const Certificate& certificate : certificates) {
-		os << certificate.getName() << ", ";
+	for (const Certificate* certificate : certificates) {
+		os << certificate->getName() << ", ";
 	}
 	os << std::endl;
 	os << "Price: " << price << std::endl;

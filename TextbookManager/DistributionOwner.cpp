@@ -2,7 +2,12 @@
 #include "distribution_owner.h"
 #include "common.h" 
 
-DistributionOwner::DistributionOwner() : salary(0.0), days_owner(0) {
+DistributionOwner::DistributionOwner() {
+	this->setName();
+	this->setGender();
+	this->setAge();
+	this->setDaysOwner();
+	this->setSalary();
 }
 
 DistributionOwner::DistributionOwner(const std::string& name, int age, const std::string& gender, double salary)
@@ -52,5 +57,5 @@ void DistributionOwner::setDaysOwner() {
 
 std::ostream& DistributionOwner::print(std::ostream& os) const {
     os << ", Salary: " << salary << ", Days Owner: " << days_owner;
-    return os;
+	return os;
 }

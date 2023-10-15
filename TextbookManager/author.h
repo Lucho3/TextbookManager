@@ -8,7 +8,7 @@ class Author : public Person {
 private:
     int number_of_tb_published;
     std::string guild;
-
+    std::ostream& print(std::ostream& os) const override;
 public:
     Author();
     Author(const std::string& name, int age, const std::string& gender, const std::string& guild);
@@ -17,7 +17,6 @@ public:
     const int getNumberOfTbPublished() const;
     void setGuild();
     void setNumberOfTbPublished();
-    std::ostream& print(std::ostream& os) const override;
 };
 
 #endif

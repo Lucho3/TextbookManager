@@ -6,11 +6,9 @@
 
 int main()
 {
-    Textbook *c = new Textbook();
-    c->setIssue();
-    std::cout << c->getIssue();
+    Certificate *c = new Certificate();
+    std::cout << *c;
     delete c;
-    std::cout << "Hello World!\n";
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

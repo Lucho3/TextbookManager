@@ -1,13 +1,25 @@
 #include "distribution.h"
+#include "dis_helper.h"
+#include "common.h"
+#include <sstream>
 
-Distribution::Distribution() : name(""), owner(DistributionOwner()) {
+Distribution::Distribution(std::vector<Textbook*>& list_of_tbs, std::vector<DistributionOwner*>& list_of_owners) {
+    this->setName();
+    this->setAddress();
+    this->setOwner(list_of_owners);
+    this->setPhoneNumber();
+    this->setAvailableTextbooks(list_of_tbs);
 }
 
-Distribution::Distribution(const std::string& name, const DistributionOwner& owner)
+Distribution::Distribution(const std::string& name, DistributionOwner* owner)
     : name(name), owner(owner) {
 }
 
 Distribution::~Distribution() {
+    for (Textbook* tb : this->available_textbooks) {
+        delete tb;
+    }
+    this->available_textbooks.clear();
 }
 
 const std::string& Distribution::getAddress() const {
@@ -31,35 +43,108 @@ void Distribution::setAddress() {
 }
 
 const std::string& Distribution::getPhoneNumber() const {
-    return phone_number;
+    return this->phone_number;
 }
 
-DistributionOwner& Distribution::getOwner() {
-    return owner;
+void Distribution::setPhoneNumber() {
+    std::system("cls");
+    std::cout << "Please enter the phone number: ";
+    std::string new_number;
+    int counter = 0;
+    do {
+        if (counter > 0) {
+            std::system("cls");
+            std::cout << "Please reenter the phone number: ";
+        }
+        getline(std::cin, new_number);
+        counter++;
+    } while (!isValidNumber(new_number));
 }
 
-void Distribution::setName(const std::string& new_name) {
-    name = new_name;
+DistributionOwner* Distribution::getOwner() {
+    return this->owner;
 }
 
-
-
-void Distribution::setPhoneNumber(const std::string& new_phone_number) {
-    phone_number = new_phone_number;
+void Distribution::setOwner(std::vector<DistributionOwner*>& list_of_owners) {
+    //really raw should be fixed prob
+    std::system("cls");
+    int len_of_cert = list_of_owners.size();
+    if (len_of_cert) {
+        for (int i = 0; i < len_of_cert - 1; ++i) {
+            std::cout << i << ": " << list_of_owners[i];
+        }
+        std::cout << "\nEnter the indexes of the owner that you want: ";
+        std::string input;
+        int index;
+        int counter = 0;
+        do {
+            if (counter > 0) {
+                std::system("cls");
+                std::cout << "Please reenter the index wrong value: ";
+            }
+            getline(std::cin, input);
+            counter++;
+        } while (!(tryParseInt(input, index)));
+        this->owner = list_of_owners[index];
+    }
 }
 
-void Distribution::setOwner(const DistributionOwner& new_owner) {
-    owner = new_owner;
+const std::string& Distribution::getName() const {
+    return this->name;
+}
+
+std::vector<Textbook*>& Distribution::getAvailableTextbooks() {
+    return this->available_textbooks;
+}
+
+void Distribution::setAvailableTextbooks(std::vector<Textbook*>& list_of_tbs) {
+    //really raw should be fixed prob
+    std::system("cls");
+    int len_of_cert = list_of_tbs.size();
+    if (len_of_cert) {
+        for (int i = 0; i < len_of_cert - 1; ++i) {
+            std::cout << i << ": " << list_of_tbs[i];
+        }
+        std::cout << "\nEnter the indexes of the TB that you want separated by ', ': ";
+        std::string input;
+        std::getline(std::cin, input);
+        std::vector<int> indexes;
+        std::string token;
+        std::stringstream ss(input);
+        while (std::getline(ss, token, ',')) {
+            int number = std::stoi(token);
+            indexes.push_back(number);
+        }
+
+        for (int index : indexes) {
+            this->available_textbooks.push_back(list_of_tbs[index]);
+        }
+    }
+}
+
+void Distribution::setName() {
+    std::system("cls");
+    std::cout << "Please enter the name: ";
+    std::string new_name;
+    int counter = 0;
+    do {
+        if (counter > 0) {
+            std::system("cls");
+            std::cout << "Please reenter the name: ";
+        }
+        getline(std::cin, new_name);
+        counter++;
+    } while (new_name.empty());
 }
 
 std::ostream& Distribution::print(std::ostream& os) const {
     os << "Name: " << name << ", Address: " << address << ", Phone Number: " << phone_number << std::endl;
     os << "Distribution Owner: ";
-    owner.print(os);
+    owner->print(os);
     os << "\nAvailable Textbooks: ";
-    for (const Textbook& textbook : available_textbooks) {
+    for (const Textbook* textbook : available_textbooks) {
         os << "\n- ";
-        textbook.print(os);
+        textbook->print(os);
     }
     return os;
 }

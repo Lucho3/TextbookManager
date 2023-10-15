@@ -1,7 +1,12 @@
 #include "author.h"
 #include "common.h"
 
-Author::Author() : number_of_tb_published(0), guild("Nan") {
+Author::Author()  {
+	this->setName();
+	this->setGender();
+	this->setAge();
+	this->setNumberOfTbPublished();
+	this->setGuild();
 }
 
 Author::Author(const std::string & name, int age, const std::string& gender, const std::string & guild)
@@ -53,7 +58,12 @@ void Author::setNumberOfTbPublished() {
 	} while (!(tryParseInt(input, this->number_of_tb_published)));
 }
 
-std::ostream& Author::print(std::ostream & os) const {
-    os << ", Guild: " << guild << ", Number of TB Published: " << number_of_tb_published;
-    return os;
+std::ostream& Author::print(std::ostream& os) const {
+	std::system("cls");
+	os << "Name: " << this->getName() << std::endl;
+	os << "Gender: " << this->getGender() << std::endl;
+	os << "Age: " << this->getAge() << std::endl;
+	os << "Guild: " << this->guild << std::endl;
+	os << "Number Of TB Published: " << this->number_of_tb_published << std::endl;
+	return os;
 }

@@ -11,22 +11,23 @@ private:
     std::string name;
     std::string address;
     std::string phone_number;
-    DistributionOwner owner;
-    std::vector<Textbook> available_textbooks;
+    DistributionOwner* owner;
+    std::vector<Textbook*> available_textbooks;
 
 public:
-    Distribution();
-    Distribution(const std::string& name, const DistributionOwner& owner);
+    Distribution(std::vector<Textbook*>& list_of_tbs, std::vector<DistributionOwner*>& list_of_owners);
+    Distribution(const std::string& name, DistributionOwner* owner);
     ~Distribution();
     const std::string& getAddress() const;
     const std::string& getPhoneNumber() const;
-    DistributionOwner& getOwner();
+    const std::string& getName() const;
+    DistributionOwner* getOwner();
     void setName();
     void setAddress();
     void setPhoneNumber();
-    void setOwner(const DistributionOwner&);
-    std::vector<Textbook>& getAvailableTextbooks();
-    void setAvailableTextbooks();
+    void setOwner(std::vector<DistributionOwner*>& list_of_owners);
+    std::vector<Textbook*>& getAvailableTextbooks();
+    void setAvailableTextbooks(std::vector<Textbook*>& list_of_tbs);
     std::ostream& print(std::ostream& os) const override;
 };
 

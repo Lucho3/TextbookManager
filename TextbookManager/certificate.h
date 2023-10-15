@@ -22,6 +22,4 @@ public:
 	void setDate();
 	std::ostream& print(std::ostream& os) const override;
 };
-
-
 #endif

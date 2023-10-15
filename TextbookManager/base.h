@@ -7,7 +7,7 @@ class Base {
 private:
     virtual std::ostream& print(std::ostream& os) const = 0;
 public:
-    std::ostream& operator<<(std::ostream& os);
+    friend std::ostream& operator<<(std::ostream& os, const Base& base);
 };
 
 #endif
