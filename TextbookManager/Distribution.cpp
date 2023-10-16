@@ -38,17 +38,7 @@ const std::string& Distribution::getPhoneNumber() const {
 
 void Distribution::setPhoneNumber() {
     std::system("cls");
-    std::cout << "Please enter the phone number: ";
-    std::string new_number;
-    int counter = 0;
-    do {
-        if (counter > 0) {
-            std::system("cls");
-            std::cout << "Please reenter the phone number: ";
-        }
-        getline(std::cin, new_number);
-        counter++;
-    } while (!isValidNumber(new_number));
+    this->phone_number = getIntCommon("the phone number");
 }
 
 DistributionOwner* Distribution::getOwner() {

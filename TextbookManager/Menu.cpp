@@ -139,7 +139,6 @@ void Menu::startTheMainApp() {
             break;
         case 2:
             std::cout << "Goodbye\n";
-            delete this->ctrl;
             return;
         default:
             std::cout << "Invalid choice. Please select a valid option.\n";

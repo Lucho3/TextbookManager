@@ -34,7 +34,7 @@ Controller::~Controller() {
     for (Author* a : this->authors_list) {
         delete a;
     }
-        this->authors_list.clear();
+    this->authors_list.clear();
 }
 
 void Controller::createNewElement(const std::string& element) {
