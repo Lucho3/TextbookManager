@@ -76,10 +76,10 @@ void Controller::finishOrder() {
         std::cout << *this->order_list[i];
     }
     std::cout << std::endl;
-    int index = setInt("your choice:");
+    int index = getIntCommon("your choice");
     this->order_list[index]->calculateFinalPrice();
     std::cout << "The final price is: ";
-    std::cout << this->order_list[index]->getFinalPrice();
+    std::cout << this->order_list[index]->getFinalPrice() << std::endl;
     delete this->order_list[index];
     this->order_list.erase(this->order_list.begin() + index);
 
@@ -93,7 +93,18 @@ void Controller::addTextBookToOrder() {
         std::cout << "Name of the distribution: " << this->order_list[i]->getDistribution()->getName() << std::endl;;
     }
 
-    int index = setInt("your choice");
+    int index = getIntCommon("your choice");
     std::cout << std::endl;
     this->order_list[index]->addTextbooksToOrder(this->order_list[index]->getDistribution()->getAvailableTextbooks());
+}
+
+void Controller::addCertificteToTextbook() {
+    std::system("cls");
+    for (int i = 0; i < this->textbooks_list.size(); ++i) {
+        std::cout << "Index: " << i << std::endl;
+        std::cout << "Textbook title:" << this->textbooks_list[i]->getTitle() << std::endl;
+    }
+
+    int index = getIntCommon("your choice");
+    this->textbooks_list[index]->setCertificate();
 }

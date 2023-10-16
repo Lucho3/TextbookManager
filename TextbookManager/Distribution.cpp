@@ -29,18 +29,7 @@ const std::string& Distribution::getAddress() const {
 
 void Distribution::setAddress() {
     std::system("cls");
-    std::cout << "Please enter the address: ";
-    std::string new_address;
-    int counter = 0;
-    do {
-        if (counter > 0) {
-            std::system("cls");
-            std::cout << "Please reenter the address wrong type: ";
-        }
-        std::getline(std::cin, new_address);
-        counter++;
-    } while (new_address.empty());
-    this->address = new_address;
+    this->address = getStringCommon("the address");
 }
 
 const std::string& Distribution::getPhoneNumber() const {
@@ -72,7 +61,8 @@ void Distribution::setOwner(std::vector<DistributionOwner*>& list_of_owners) {
     int len_of_cert = list_of_owners.size();
     if (len_of_cert) {
         for (int i = 0; i < len_of_cert ; ++i) {
-            std::cout << i << ": " << *list_of_owners[i];
+            std::cout << "Index: " << i << std::endl;
+            std::cout << *list_of_owners[i];
         }
         std::cout << "Enter the index of the owner that you want: ";
         std::string input;
@@ -104,9 +94,10 @@ void Distribution::setAvailableTextbooks(std::vector<Textbook*>& list_of_tbs) {
     int len_of_cert = list_of_tbs.size();
     if (len_of_cert) {
         for (int i = 0; i < len_of_cert; ++i) {
-            std::cout << i << ": " << list_of_tbs[i]->getTitle();
+            std::cout << "Index: " << i << std::endl;
+            std::cout << "Title: " << list_of_tbs[i]->getTitle() << std::endl;
         }
-        std::cout << "\nEnter the indexes of the TB that you want separated by ', ': ";
+        std::cout << "Enter the indexes of the TB that you want separated by ', ': ";
         std::string input;
         std::getline(std::cin, input);
         std::vector<int> indexes;
@@ -125,27 +116,17 @@ void Distribution::setAvailableTextbooks(std::vector<Textbook*>& list_of_tbs) {
 
 void Distribution::setName() {
     std::system("cls");
-    std::cout << "Please enter the name: ";
-    std::string new_name;
-    int counter = 0;
-    do {
-        if (counter > 0) {
-            std::system("cls");
-            std::cout << "Please reenter the name: ";
-        }
-        getline(std::cin, new_name);
-        counter++;
-    } while (new_name.empty());
-    this->name = new_name;
+    this->name = getStringCommon("the name");
 }
 
 std::ostream& Distribution::print(std::ostream& os) const {
-    os << "Name: " << name << ", Address: " << address << ", Phone Number: " << phone_number 
-       << ", Distribution Owner: " << this->owner->getName() << std::endl;
-    os << "\nAvailable Textbooks: ";
+    os << "Name: " << name << ", Address: " << address << ", Phone Number: " << phone_number << std::endl;
+    os << "Distribution Owner: " << this->owner->getName() << std::endl;
+    os << "Available Textbooks:\n";
 
     for (const Textbook* textbook : available_textbooks) {;
         textbook->print(os);
+        os << std::endl;
     }
     return os;
 }

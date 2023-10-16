@@ -11,10 +11,10 @@ Order::Order(std::vector<Distribution*>& list_of_distributions)
 }
 
 Order::~Order() {
-    delete this->distribution;
-    for (Textbook* tb : this->textbooks_to_buy) {
-        delete tb;
-    }
+    //delete this->distribution;
+    //for (Textbook* tb : this->textbooks_to_buy) {
+    //    delete tb;
+    //}
 
 }
 
@@ -24,18 +24,7 @@ const std::string& Order::getDate() const {
 
 void Order::setDate() {
     std::system("cls");
-    std::cout << "Please enter the date of the orderin format DD:MM:YYYY: ";
-    std::string new_date;
-    int counter = 0;
-    do {
-        if (counter > 0) {
-            std::system("cls");
-            std::cout << "Please reenter the date wrong format: ";
-        }
-        std::getline(std::cin, new_date);
-        counter++;
-    } while (!isValidDate(new_date));
-    this->date = new_date;
+    this->date = getDateCommon("the date of the orderin format DD:MM:YYYY");
 }
 
 Distribution* Order::getDistribution() {
@@ -48,11 +37,11 @@ void Order::setDistribution(std::vector<Distribution*>& list_of_distributions) {
     int len_of_cert = list_of_distributions.size();
     if (len_of_cert) {
         for (int i = 0; i < len_of_cert; ++i) {
-            std::cout << "\nIndex: " << i ;
-            std::cout <<  list_of_distributions[i]->getName();
+            std::cout << "Index: " << i << std::endl;
+            std::cout << "Name: " << list_of_distributions[i]->getName();
         }
-
-        this->distribution = list_of_distributions[setInt("the index of the distribution that you want")];
+        std::cout << std::endl;
+        this->distribution = list_of_distributions[getIntCommon("the index of the distribution that you want")];
     }
 }
 
@@ -102,9 +91,11 @@ void Order::addTextbooksToOrder(std::vector<Textbook*>& list_of_tbs) {
 std::ostream& Order::print(std::ostream& os) const {
     os << "Order Date: " << date << std::endl;
     os << "Distribution Name: " << this->distribution->getName() << std::endl;
-    os << "\nTextbooks: ";
+    os << "Textbooks: ";
+    os << std::endl;
     for (Textbook* textbook : textbooks_to_buy) {
-        os << textbook->getTitle();
+        os << "Title: " << textbook->getTitle();
+        os << std::endl;
     }
     return os;
 }

@@ -37,21 +37,8 @@ const std::string& Textbook::getTitle() const {
 
 void Textbook::setTitle() {
 	std::system("cls");
-	std::cout << "Please enter the title: ";
-	std::string new_title;
-	int counter = 0;
-	do {
-		if (counter > 0) {
-			std::system("cls");
-			std::cout << "Please reenter the title wrong type: ";
-		}
-		std::getline(std::cin, new_title);
-		counter++;
-	} while (new_title.empty());
-	this->title = new_title;
+	this->title = getStringCommon("the title");
 }
-
-//TODO: authors to do 
 
 const int Textbook::getIssue() const {
 	return this->issue;
@@ -59,17 +46,7 @@ const int Textbook::getIssue() const {
 
 void Textbook::setIssue() {
 	std::system("cls");
-	std::string input;
-	std::cout << "Please enter the issue: ";
-	int counter=0;
-	do {
-		if (counter > 0) {
-			std::system("cls");
-			std::cout << "Please reenter the issue wrong type: ";
-		}
-		getline(std::cin, input);
-		counter++;
-	} while (!(tryParseInt(input, this->issue)));
+	this->issue = getIntCommon("the issue");
 }
 
 
@@ -77,6 +54,7 @@ const std::string& Textbook::getISBN() const {
 	return this->ISBN;
 }
 
+//doesnt work should be fixed
 void Textbook::setISBN() 
 {
 	std::system("cls");
@@ -109,17 +87,7 @@ const int Textbook::getCirculation() const {
 
 void Textbook::setCirculation() {
 	std::system("cls");
-	std::cout << "Please enter the circulation: ";
-	std::string input;
-	int counter = 0;
-	do {
-		if (counter > 0) {
-			std::system("cls");
-			std::cout << "Please reenter the circulation wrong type: ";
-		}
-		getline(std::cin, input);
-		counter++;
-	} while (!(tryParseInt(input, this->circulation)));
+	this->circulation = getIntCommon("the circulation");
 }
 
 const double Textbook::getPrice() const {
@@ -128,17 +96,7 @@ const double Textbook::getPrice() const {
 
 void Textbook::setPrice() {
 	std::system("cls");
-	std::cout << "Please enter the price: ";
-	std::string input;
-	int counter = 0;
-	do {
-		if (counter > 0) {
-			std::system("cls");
-			std::cout << "Please reenter the price wrong type: ";
-		}
-		getline(std::cin, input);
-		counter++;
-	} while (!(tryParseDouble(input, this->price)));
+	this->price = getDoubleCommon("the price");
 }
 
 const std::string& Textbook::getReleaseDate() const {
@@ -147,18 +105,7 @@ const std::string& Textbook::getReleaseDate() const {
 
 void Textbook::setReleaseDate() {
 	std::system("cls");
-	std::cout << "Please enter the release date in format DD:MM:YYYY: ";
-	std::string new_date;
-	int counter = 0;
-	do {
-		if (counter > 0) { 
-			std::system("cls");
-			std::cout << "Please reenter the date wrong format: ";
-		}
-		std::getline(std::cin, new_date);
-		counter++;
-	} while (!isValidDate(new_date));
-	this->release_date = new_date;
+	this->release_date = getDateCommon("the release date in format DD:MM:YYYY");
 }
 
 std::vector<Author*>& Textbook::getAuthors() {
@@ -171,7 +118,8 @@ void Textbook::setAuthors(std::vector<Author*>& authors) {
 	int len_of_cert = authors.size();
 	if (len_of_cert) {
 		for (int i = 0; i < len_of_cert; ++i) {
-			std::cout << i << ": " << authors[i]->getName() << " Guild: " << authors[i]->getGuild() << std::endl;
+			std::cout << "Index: " << i << std::endl;
+			std::cout << *authors[i];
 		}
 		std::cout << "Enter the indexes of the authors that you want separated by ', ': ";
 		std::string input;

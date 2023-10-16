@@ -60,8 +60,8 @@ bool tryParseDouble(const std::string& str, double& result) {
 	}
 }
 
-int setInt(const std::string& prompt) {
-	std::cout << "Enter " << prompt <<": ";
+const int getIntCommon(const std::string& prompt) {
+	std::cout << "Please enter " << prompt <<": ";
 	std::string option;
 	int counter = 0;
 	int chosen;
@@ -75,4 +75,53 @@ int setInt(const std::string& prompt) {
 	} while (!(tryParseInt(option, chosen)));
 
 	return chosen;
+}
+
+const double getDoubleCommon(const std::string& prompt) {
+	std::cout << "Please enter " << prompt << ": ";
+	std::string option;
+	int counter = 0;
+	double chosen;
+	do {
+		if (counter > 0) {
+			std::system("cls");
+			std::cout << "Please reenter" << prompt << ": ";
+		}
+		getline(std::cin, option);
+		counter++;
+	} while (!(tryParseDouble(option, chosen)));
+
+	return chosen;
+}
+
+const std::string getStringCommon(const std::string& prompt) {
+	std::cout << "Please enter " << prompt << ": ";
+	std::string new_value;
+	int counter = 0;
+	do {
+		if (counter > 0) {
+			std::system("cls");
+			std::cout << "Please reenter" << prompt << ": ";
+		}
+		std::getline(std::cin, new_value);
+		counter++;
+	} while (new_value.empty());
+
+	return new_value;
+}
+
+const std::string getDateCommon(const std::string& prompt) {
+	std::cout << "Please enter " << prompt << ": ";
+	std::string new_date;
+	int counter = 0;
+	do {
+		if (counter > 0) {
+			std::system("cls");
+			std::cout  << "Please reenter" << prompt << ": ";;
+		}
+		std::getline(std::cin, new_date);
+		counter++;
+	} while (!isValidDate(new_date));
+	
+	return new_date;
 }

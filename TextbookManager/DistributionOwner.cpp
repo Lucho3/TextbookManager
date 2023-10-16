@@ -23,17 +23,7 @@ const double DistributionOwner::getSalary() const {
 
 void DistributionOwner::setSalary() {
 	std::system("cls");
-	std::cout << "Please enter the salary: ";
-	std::string input;
-	int counter = 0;
-	do {
-		if (counter > 0) {
-			std::system("cls");
-			std::cout << "Please reenter the salary wrong type: ";
-		}
-		getline(std::cin, input);
-		counter++;
-	} while (!(tryParseDouble(input, this->salary)));
+	this->salary = getDoubleCommon("enter the salary");
 }
 
 const int DistributionOwner::getDaysOwner() const {
@@ -42,17 +32,7 @@ const int DistributionOwner::getDaysOwner() const {
 
 void DistributionOwner::setDaysOwner() {
 	std::system("cls");
-	std::cout << "Please enter number days ownership: ";
-	std::string input;
-	int counter = 0;
-	do {
-		if (counter > 0) {
-			std::system("cls");
-			std::cout << "Please reenter the days owner: ";
-		}
-		getline(std::cin, input);
-		counter++;
-	} while (!(tryParseInt(input, this->days_owner)));
+	this->days_owner = getIntCommon("number days ownership");
 }
 
 std::ostream& DistributionOwner::print(std::ostream& os) const {

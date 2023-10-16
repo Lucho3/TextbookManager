@@ -20,19 +20,7 @@ const std::string& Person::getName() const {
 
 void Person::setName() {
 	std::system("cls");
-	std::cout << "Please enter the name of the person: ";
-	std::string new_name;
-	int counter = 0;
-	do {
-		if (counter > 0) {
-			std::system("cls");
-			std::cout << "The name should not be empty: ";
-		}
-		std::getline(std::cin, new_name);
-		counter += 1;
-
-	} while (new_name.empty());
-	this->name = new_name;
+	this->name = getStringCommon("the name of the person");
 }
 
 
@@ -43,17 +31,7 @@ const int Person::getAge() const {
 
 void Person::setAge() {
 	std::system("cls");
-	std::cout << "Please enter the age: ";
-	std::string input;
-	int counter = 0;
-	do {
-		if (counter > 0) {
-			std::system("cls");
-			std::cout << "Please reenter the age wrong value: ";
-		}
-		getline(std::cin, input);
-		counter++;
-	} while (!(tryParseInt(input, this->age)));
+	this->age = getIntCommon("the age of the person");
 }
 
 const std::string& Person::getGender() const {

@@ -26,6 +26,7 @@ public:
     void printAllElements(const std::string& element);
     void finishOrder();
     void addTextBookToOrder();
+    void addCertificteToTextbook();
 };
 
 #endif

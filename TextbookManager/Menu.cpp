@@ -42,7 +42,7 @@ const int Menu::setElementMenu(const std::string element) const {
         std::cout << "2. Go Back.\n";
     }
 
-    return setInt("your choice");
+    return getIntCommon("your choice");
 }
 
 void Menu::startTextbookMenu(const std::string element) {
@@ -57,7 +57,7 @@ void Menu::startTextbookMenu(const std::string element) {
             std::getchar();
             break;
         case 2:
-            //this->ctrl->finishOrder();
+            this->ctrl->addCertificteToTextbook();
             break;
         case 3:
             std::cout << "Goodbye\n";
@@ -83,7 +83,9 @@ void Menu::startOrderMenu(const std::string element) {
              this->ctrl->addTextBookToOrder();
              break;
         case 3:
-             this->ctrl->finishOrder(); 
+             this->ctrl->finishOrder();
+             std::cout << "Press any key to continue.";
+             std::getchar();
              break;
         case 4:
             std::cout << "Goodbye\n";
@@ -106,20 +108,6 @@ void Menu::startElementMenu(const std::string element) {
             std::getchar();
             break;
         case 2:
-            if (element == "Textbook")
-                continue;
-            // this->ctrl->addCertificate();
-            else if (element == "Order")
-                this->ctrl->finishOrder();
-            else {
-                std::cout << "Goodbye\n";
-                return;
-            }
-        case 3:
-            std::cout << "Goodbye\n";
-            return;
-        case 4:
-            
             std::cout << "Goodbye\n";
             return;
         default:
@@ -135,7 +123,7 @@ void Menu::setGlobalMenu() {
     std::cout << "1. File actions\n";
     std::cout << "2. Exit\n";
 
-    this->chosen_option = setInt("your choice");
+    this->chosen_option = getIntCommon("your choice");
 }
 
 void Menu::startTheMainApp() {
@@ -168,7 +156,7 @@ const int Menu::setUserMenu() const{
     std::cout << "4. Element menu for order.\n";
     std::cout << "5. Go Back.\n";
 
-    return setInt("your choice");
+    return getIntCommon("your choice");
 }
 
 void Menu::startUserControlledInputMenu() {
