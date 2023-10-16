@@ -185,4 +185,5 @@ void Menu::startUserControlledInputMenu() {
 }
 
 void Menu::startFileControlledInputMenu() {
+    this->ctrl->saveVectorsToFile();
 }

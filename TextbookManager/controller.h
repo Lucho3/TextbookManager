@@ -27,6 +27,7 @@ public:
     void finishOrder();
     void addTextBookToOrder();
     void addCertificteToTextbook();
+    void saveVectorsToFile();
 };
 
 #endif

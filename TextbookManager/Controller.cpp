@@ -5,6 +5,9 @@
 #include "distribution.h"
 #include "textbook.h"
 #include "common.h"
+#include <fstream>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 
 Controller::Controller() : certificates_list() {
     
@@ -107,4 +110,15 @@ void Controller::addCertificteToTextbook() {
 
     int index = getIntCommon("your choice");
     this->textbooks_list[index]->setCertificate();
+}
+
+
+void Controller::saveVectorsToFile() {
+    std::ofstream outputFile("my_frirst_file.txt");
+  
+    boost::archive::text_oarchive outputArchive(outputFile);
+    for (Author* author : this->authors_list) {
+        outputArchive << author;
+    }
+   
 }

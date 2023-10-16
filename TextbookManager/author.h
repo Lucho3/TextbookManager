@@ -17,6 +17,12 @@ public:
     const int getNumberOfTbPublished() const;
     void setGuild();
     void setNumberOfTbPublished();
+
+    template <typename Archive>
+    void serialize(Archive& ar, const unsigned int version) {
+        ar& this->number_of_tb_published;
+        ar& this->guild;
+    }
 };
 
 #endif
