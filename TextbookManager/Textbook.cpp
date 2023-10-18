@@ -76,12 +76,13 @@ void Textbook::setISBN()
 			validateFunction = isValidISBN10;
 		else if (new_ISBN.length() == 13)
 			validateFunction = isValidISBN13;
-		else
+		else {
 			validateFunction = [](const std::string& str) -> bool {
-			return false;
-		};
+				return false;
+			};
+		}
 		counter++;
-	} while (validateFunction(new_ISBN));
+	} while (!validateFunction(new_ISBN));
 	this->ISBN = new_ISBN;
 }
 
