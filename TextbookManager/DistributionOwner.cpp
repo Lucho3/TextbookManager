@@ -3,6 +3,11 @@
 #include "common.h" 
 
 DistributionOwner::DistributionOwner() {
+
+}
+
+DistributionOwner::DistributionOwner(int number) {
+	std::cout << "Creted object number: " << number;
 	this->setName();
 	this->setGender();
 	this->setAge();

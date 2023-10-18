@@ -5,6 +5,10 @@
 #include "certificate.h"
 #include "common.h"
 
+Textbook::Textbook() {
+
+}
+
 Textbook::Textbook(std::vector<Author*>& authors) {
 	this->setTitle();
 	this->setReleaseDate();
@@ -144,7 +148,7 @@ std::vector<Certificate*>& Textbook::getCertificates() {
 
 void Textbook::setCertificate() {
 	//On theory we need another class that holds the reference between the certificate and TB or a map in the TB
-	this->certificates.push_back(new Certificate());
+	this->certificates.push_back(new Certificate(5));
 }
 
 std::ostream& Textbook::print(std::ostream& os) const {

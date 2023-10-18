@@ -4,6 +4,10 @@
 #include <sstream>
 #include "common.h"
 
+Order::Order() {
+
+}
+
 Order::Order(std::vector<Distribution*>& list_of_distributions)
     : final_price(0.0) {
     this->setDate();

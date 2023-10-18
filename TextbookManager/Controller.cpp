@@ -8,12 +8,13 @@
 #include <fstream>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
+#include <boost/serialization/vector.hpp>
 
 Controller::Controller() : certificates_list() {
     
 }
 
-Controller::~Controller() {
+void Controller::ClearLists() {
     for (Textbook* tb : this->textbooks_list) {
         delete tb;
     }
@@ -33,18 +34,22 @@ Controller::~Controller() {
         delete dio;
     }
     this->distribution_owners_list.clear();
-    
+
     for (Author* a : this->authors_list) {
         delete a;
     }
     this->authors_list.clear();
 }
 
+Controller::~Controller() {
+    this->ClearLists();
+}
+
 void Controller::createNewElement(const std::string& element) {
     if(element == "Distribution Owner")
-        this->distribution_owners_list.push_back(new DistributionOwner());
+        this->distribution_owners_list.push_back(new DistributionOwner(5));
     else if (element == "Author")
-        this->authors_list.push_back(new Author());
+        this->authors_list.push_back(new Author(5));
     else if (element == "Textbook")
         this->textbooks_list.push_back(new Textbook(this->authors_list));
     else if (element == "Distribution")
@@ -112,13 +117,38 @@ void Controller::addCertificteToTextbook() {
     this->textbooks_list[index]->setCertificate();
 }
 
+template <typename T>
+void Controller::serializeToBinaryFile(const std::string& fileName, const T& data) {
+    std::ofstream outputFile(fileName, std::ios::binary);
+    boost::archive::text_oarchive outputArchive(outputFile);
+    outputArchive << data;
+}
 
 void Controller::saveVectorsToFile() {
-    std::ofstream outputFile("my_frirst_file.txt");
-  
-    boost::archive::text_oarchive outputArchive(outputFile);
-    for (Author* author : this->authors_list) {
-        outputArchive << author;
-    }
-   
+    this->serializeToBinaryFile("authors.dat", this->authors_list);
+    this->serializeToBinaryFile("certificates.dat", this->certificates_list);
+    this->serializeToBinaryFile("owners.dat", this->distribution_owners_list);
+    this->serializeToBinaryFile("distributions.dat", this->distributions_list);
+    this->serializeToBinaryFile("textbooks.dat", this->textbooks_list);
+    this->serializeToBinaryFile("orders.dat", this->order_list);
 }
+
+template <typename T>
+T Controller::deserializeFromBinaryFile(const std::string& fileName) {
+    T data;
+    std::ifstream inputFile(fileName, std::ios::binary);
+    boost::archive::text_iarchive inputArchive(inputFile);
+    inputArchive >> data;
+    return data;
+}
+
+void Controller::loadVectorsFromFile() {
+    this->ClearLists();
+    this->authors_list = deserializeFromBinaryFile<std::vector<Author*>>("authors.dat");
+    this->certificates_list = deserializeFromBinaryFile<std::vector<Certificate*>>("certificates.dat");
+    this->distribution_owners_list = deserializeFromBinaryFile<std::vector<DistributionOwner*>>("owners.dat");
+    this->distributions_list = deserializeFromBinaryFile<std::vector<Distribution*>>("distributions.dat");
+    this->textbooks_list = deserializeFromBinaryFile<std::vector<Textbook*>>("textbooks.dat");
+    this->order_list = deserializeFromBinaryFile<std::vector<Order*>>("orders.dat");
+}
+

@@ -1,8 +1,6 @@
 #ifndef DISTRIBUTORS_H
 #define DISTRIBUTORS_H
 
-#include <string>
-#include <vector>
 #include "textbook.h"
 #include "distribution_owner.h"
 
@@ -14,7 +12,19 @@ private:
     DistributionOwner* owner;
     std::vector<Textbook*> available_textbooks;
 
+    friend class boost::serialization::access;
+
+    template <typename Archive>
+    void serialize(Archive& ar, const unsigned int version) {
+        ar& name;
+        ar& address;
+        ar& phone_number;
+        ar& owner;
+        ar& available_textbooks;
+    }
+
 public:
+    Distribution();
     Distribution(std::vector<Textbook*>& list_of_tbs, std::vector<DistributionOwner*>& list_of_owners);
     Distribution(const std::string& name, DistributionOwner* owner);
     ~Distribution();

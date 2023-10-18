@@ -1,7 +1,12 @@
 #include "author.h"
 #include "common.h"
 
-Author::Author()  {
+Author::Author() {
+	
+}
+
+Author::Author(int number) {
+	std::cout << "Creted object number: " << number;
 	this->setName();
 	this->setGender();
 	this->setAge();
@@ -9,9 +14,7 @@ Author::Author()  {
 	this->setGuild();
 }
 
-Author::Author(const std::string & name, int age, const std::string& gender, const std::string & guild)
-    : Person(name, age, gender), number_of_tb_published(0), guild(guild) {
-}
+
 
 Author::~Author() {
 

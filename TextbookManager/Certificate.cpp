@@ -2,6 +2,9 @@
 #include "common.h"
 
 Certificate::Certificate() {
+}
+Certificate::Certificate(int number) {
+	std::cout << "Creted object number: " << number;
 	this->setName();
 	this->setAssigner();
 	this->setDate();

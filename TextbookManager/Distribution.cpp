@@ -3,6 +3,10 @@
 #include "common.h"
 #include <sstream>
 
+Distribution::Distribution() {
+
+}
+
 Distribution::Distribution(std::vector<Textbook*>& list_of_tbs, std::vector<DistributionOwner*>& list_of_owners) {
     this->setName();
     this->setAddress();

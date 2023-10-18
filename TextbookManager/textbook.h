@@ -1,8 +1,6 @@
 #ifndef TEXTBOOK_H
 #define TEXTBOOK_H
 
-#include <iostream>
-#include <vector>
 #include "certificate.h"
 #include "base.h"
 #include "author.h"
@@ -17,7 +15,22 @@ private:
 	int circulation;
 	std::vector<Certificate*> certificates;
 	double price;
+
+	friend class boost::serialization::access;
+
+	template <typename Archive>
+	void serialize(Archive& ar, const unsigned int version) {
+		ar& title;
+		ar& authors;
+		ar& issue;
+		ar& ISBN;
+		ar& release_date;
+		ar& circulation;
+		ar& certificates;
+		ar& price;
+	}
 public:
+	Textbook();
 	Textbook(std::vector<Author*>&);
 	Textbook(std::string&);
 	~Textbook();

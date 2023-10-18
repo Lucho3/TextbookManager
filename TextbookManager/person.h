@@ -1,8 +1,8 @@
 #ifndef PERSON_H
 #define PERSON_H
 
-#include <string>
 #include "base.h"
+
 
 //abstract
 class Person : public Base {
@@ -10,6 +10,15 @@ private:
     std::string name;
     int age;
     std::string gender;
+
+    friend class boost::serialization::access;
+
+    template <typename Archive>
+    void serialize(Archive& ar, const unsigned int version) {
+        ar& this->name;
+        ar& this->age;
+        ar& this->gender;
+    }
 
 public:
     Person();

@@ -26,6 +26,7 @@ public:
     void startElementMenu(const std::string element);
     void startTextbookMenu(const std::string);
     void startOrderMenu(const std::string);
+    const int popUp() const;
 };
 
 #endif

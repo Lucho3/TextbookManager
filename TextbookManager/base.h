@@ -2,6 +2,11 @@
 #define BASE_H
 
 #include <iostream>
+#include <string>
+#include <vector>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/access.hpp>
 
 class Base {
 private:

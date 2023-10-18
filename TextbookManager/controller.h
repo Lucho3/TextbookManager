@@ -28,6 +28,12 @@ public:
     void addTextBookToOrder();
     void addCertificteToTextbook();
     void saveVectorsToFile();
+    void loadVectorsFromFile();
+    void ClearLists();
+    template <typename T>
+    void serializeToBinaryFile(const std::string&, const T&);
+    template <typename T>
+    T deserializeFromBinaryFile(const std::string&);
 };
 
 #endif

@@ -127,8 +127,8 @@ void Menu::setGlobalMenu() {
 }
 
 void Menu::startTheMainApp() {
+    this->createController();
     while (true) {
-        this->createController();
         this->setGlobalMenu();
         switch (this->chosen_option) {
         case 0:
@@ -184,6 +184,47 @@ void Menu::startUserControlledInputMenu() {
     }
 }
 
+const int Menu::setFileMenu() const {
+    std::system("cls");
+    std::cout << "File Menu: " << std::endl;
+    std::cout << "0. Load From Files " << std::endl;
+    std::cout << "1. Save To Files " << std::endl;
+    std::cout << "2. Go Back.\n";
+
+    return getIntCommon("your choice");
+}
+
+const int Menu::popUp() const {
+    std::system("cls");
+    std::cout << "Note that the loading will erase all of the saved data."<<std::endl;
+    std::cout << "An empty vectors may be there." << std::endl;
+    std::cout << "Are you sure?" << std::endl;
+    std::cout << "0. No" << std::endl;
+    std::cout << "1. Yes" << std::endl;
+
+    return getIntCommon("your choice");
+}
+
 void Menu::startFileControlledInputMenu() {
-    this->ctrl->saveVectorsToFile();
+    while (true) {
+        switch (setFileMenu()) {
+        case 0:
+            if (this->popUp()) {
+                this->ctrl->loadVectorsFromFile();
+                std::cout << "Loading Completed.";
+                std::getchar();
+            }
+            break;
+        case 1:
+            std::system("cls");
+            std::cout << "Saving Copleted.";
+            std::getchar();
+            this->ctrl->saveVectorsToFile();
+            break;
+        case 2:
+            return;
+        default:
+            std::cout << "Invalid choice. Please select a valid option.\n";
+        }
+    }
 }
