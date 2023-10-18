@@ -12,12 +12,14 @@
 
 class Controller {
 private:
-    std::vector<Certificate*> certificates_list;
-    std::vector<Author*> authors_list;
-    std::vector<DistributionOwner*> distribution_owners_list;
-    std::vector<Distribution*> distributions_list;
-    std::vector<Textbook*> textbooks_list;
-    std::vector<Order*> order_list;
+    std::vector<std::shared_ptr<Certificate>> certificates_list;
+    std::vector<std::shared_ptr<Author>> authors_list;
+    std::vector<std::shared_ptr<DistributionOwner>> distribution_owners_list;
+    std::vector<std::shared_ptr<Distribution>> distributions_list;
+    std::vector<std::shared_ptr<Textbook>> textbooks_list;
+    std::vector<std::shared_ptr<Order>> order_list;
+    template <typename Container>
+    void ClearList(Container&);
 
 public:
     Controller();
@@ -33,7 +35,7 @@ public:
     template <typename T>
     void serializeToBinaryFile(const std::string&, const T&);
     template <typename T>
-    T deserializeFromBinaryFile(const std::string&);
+    std::vector<std::shared_ptr<T>> deserializeFromBinaryFile(const std::string&);
 };
 
 #endif

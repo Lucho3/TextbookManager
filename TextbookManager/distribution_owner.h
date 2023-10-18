@@ -26,6 +26,7 @@ public:
     const int getDaysOwner() const;
     void setDaysOwner();
     void setSalary();
+    void printFullInformation() const;
     std::ostream& print(std::ostream& os) const override;
 };
 

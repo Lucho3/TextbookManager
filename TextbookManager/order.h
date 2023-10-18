@@ -7,8 +7,8 @@
 class Order : public Base {
 private:
     std::string date;
-    std::vector<Textbook*> textbooks_to_buy;
-    Distribution* distribution;
+    std::vector<std::shared_ptr<Textbook>> textbooks_to_buy;
+    std::shared_ptr<Distribution> distribution;
     double final_price;
 
     friend class boost::serialization::access;
@@ -23,16 +23,17 @@ private:
 
 public:
     Order();
-    Order(std::vector<Distribution*>& list_of_distributions);
+    Order(std::vector<std::shared_ptr<Distribution>> list_of_distributions);
     ~Order();
     const std::string& getDate() const;
     void setDate();
-    Distribution* getDistribution();
-    void setDistribution(std::vector<Distribution*>& list_of_distributions);
+    std::shared_ptr<Distribution> getDistribution();
+    void setDistribution(std::vector<std::shared_ptr<Distribution>> list_of_distributions);
     const double getFinalPrice() const;
-    std::vector<Textbook*>& getTextbooksToBuy();
+    std::vector<std::shared_ptr<Textbook>> getTextbooksToBuy();
     void calculateFinalPrice();
-    void addTextbooksToOrder(std::vector<Textbook*>& list_of_tbs);
+    void addTextbooksToOrder(std::vector<std::shared_ptr<Textbook>> list_of_tbs);
+    void printFullInformation() const;
     std::ostream& print(std::ostream& os) const override;
 };
 

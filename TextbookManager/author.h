@@ -26,6 +26,7 @@ public:
     const int getNumberOfTbPublished() const;
     void setGuild();
     void setNumberOfTbPublished();
+    void printFullInformation() const;
 
 };
 

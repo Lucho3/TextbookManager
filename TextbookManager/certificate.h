@@ -28,6 +28,7 @@ public:
 	void setAssigner();
 	const std::string& getDate() const;
 	void setDate();
+	void printFullInformation() const;
 	std::ostream& print(std::ostream& os) const override;
 };
 #endif

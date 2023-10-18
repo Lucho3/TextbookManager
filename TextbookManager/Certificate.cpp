@@ -2,7 +2,9 @@
 #include "common.h"
 
 Certificate::Certificate() {
+
 }
+
 Certificate::Certificate(int number) {
 	std::cout << "Creted object number: " << number;
 	this->setName();
@@ -43,6 +45,14 @@ const std::string& Certificate::getDate() const {
 void Certificate::setDate() {
 	std::system("cls");
 	this->date_earned = getDateCommon("the date in format DD:MM:YYYY");
+}
+
+void Certificate::printFullInformation() const {
+	std::cout << "Certificate Information:" << std::endl;
+	std::cout << "Name: " << this->getName() << std::endl;
+	std::cout << "Assigner: " << this->getAssigner() << std::endl;
+	std::cout << "Date: " << this->getDate() << std::endl;
+	std::cout << std::endl;
 }
 
 std::ostream& Certificate::print(std::ostream& os) const {

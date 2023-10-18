@@ -9,7 +9,7 @@ Textbook::Textbook() {
 
 }
 
-Textbook::Textbook(std::vector<Author*>& authors) {
+Textbook::Textbook(std::vector<std::shared_ptr<Author>>) {
 	this->setTitle();
 	this->setReleaseDate();
 	this->setPrice();
@@ -25,12 +25,12 @@ Textbook::Textbook(std::string& title) :
 }
 
 Textbook::~Textbook() {
-	for (Author* a : this->authors) {
-		delete a;
+	for (auto& a : this->authors) {
+		a.reset();
 	}
 	this->authors.clear();
-	for (Certificate* c : this->certificates) {
-		delete c;
+	for (auto& c : this->certificates) {
+	    c.reset();
 	}
 	this->certificates.clear();
 }
@@ -112,11 +112,11 @@ void Textbook::setReleaseDate() {
 	this->release_date = getDateCommon("the release date in format DD:MM:YYYY");
 }
 
-std::vector<Author*>& Textbook::getAuthors() {
+std::vector<std::shared_ptr<Author>> Textbook::getAuthors() {
 	return this->authors;
 }
 
-void Textbook::setAuthors(std::vector<Author*>& authors) {
+void Textbook::setAuthors(std::vector<std::shared_ptr<Author>> authors) {
 	//really raw should be fixed prob
 	std::system("cls");
 	int len_of_cert = authors.size();
@@ -142,19 +142,42 @@ void Textbook::setAuthors(std::vector<Author*>& authors) {
 	}
 }
 
-std::vector<Certificate*>& Textbook::getCertificates() {
+void Textbook::printFullInformation() const {
+	std::cout << "Textbook Information:" << std::endl;
+	std::cout << "Title: " << this->getTitle() << std::endl;
+	std::cout << "Issue: " << this->getIssue() << std::endl;
+	std::cout << "ISBN: " << this->getISBN() << std::endl;
+	std::cout << "Release Date: " << this->getReleaseDate() << std::endl;
+	std::cout << "Circulation: " << this->getCirculation() << " copies" << std::endl;
+	std::cout << "Price: $" << this->getPrice() << std::endl;
+
+	std::cout << "Authors:" << std::endl;
+	for (const auto& author : authors) {
+		std::cout << "  Author Name: " << author->getName() << std::endl;
+	}
+
+	std::cout << "Certificates:" << std::endl;
+	for (const auto& certificate : certificates) {
+		std::cout << "  Certificate Name: " << certificate->getName() << std::endl;
+		std::cout << "  Assigner: " << certificate->getAssigner() << std::endl;
+		std::cout << "  Date: " << certificate->getDate() << std::endl;
+	}
+	std::cout << std::endl;
+}
+
+std::vector<std::shared_ptr<Certificate>> Textbook::getCertificates() {
 	return this->certificates;
 }
 
 void Textbook::setCertificate() {
 	//On theory we need another class that holds the reference between the certificate and TB or a map in the TB
-	this->certificates.push_back(new Certificate(5));
+	this->certificates.push_back(std::make_shared<Certificate>(1));
 }
 
 std::ostream& Textbook::print(std::ostream& os) const {
 	os << "Title: " << title << std::endl;
 	os << "Authors: ";
-	for (const Author* author : authors) {
+	for (const auto& author : authors) {
 		os << author->getName() << ", ";
 	}
 	os << std::endl;
@@ -163,7 +186,7 @@ std::ostream& Textbook::print(std::ostream& os) const {
 	os << "Release Date: " << release_date << std::endl;
 	os << "Circulation: " << circulation << std::endl;
 	os << "Certificates: ";
-	for (const Certificate* certificate : certificates) {
+	for (const auto& certificate : certificates) {
 		os << certificate->getName() << ", ";
 	}
 	os << std::endl;

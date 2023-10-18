@@ -1,6 +1,14 @@
 #include "common.h"
 #include <sstream>
 #include <iostream>
+#include <vector>
+#include "controller.h"
+#include "certificate.h"
+#include "author.h"
+#include "distribution_owner.h"
+#include "distribution.h"
+#include "textbook.h"
+#include "common.h"
 
 
 bool checkDelimiter(std::istream& stream, char expectedDelimiter) {
@@ -125,3 +133,4 @@ const std::string getDateCommon(const std::string& prompt) {
 	
 	return new_date;
 }
+

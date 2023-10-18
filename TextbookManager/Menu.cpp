@@ -196,7 +196,7 @@ const int Menu::setFileMenu() const {
 
 const int Menu::popUp() const {
     std::system("cls");
-    std::cout << "Note that the loading will erase all of the saved data."<<std::endl;
+    std::cout << "Note that the loading/saving will erase all of the current/saved data."<<std::endl;
     std::cout << "An empty vectors may be there." << std::endl;
     std::cout << "Are you sure?" << std::endl;
     std::cout << "0. No" << std::endl;
@@ -210,16 +210,20 @@ void Menu::startFileControlledInputMenu() {
         switch (setFileMenu()) {
         case 0:
             if (this->popUp()) {
+                std::system("cls");
                 this->ctrl->loadVectorsFromFile();
-                std::cout << "Loading Completed.";
+                std::cout << "Loading Completed. Press any key.";
                 std::getchar();
             }
             break;
         case 1:
             std::system("cls");
-            std::cout << "Saving Copleted.";
-            std::getchar();
-            this->ctrl->saveVectorsToFile();
+            if (this->popUp()) {
+                this->ctrl->saveVectorsToFile();
+                std::cout << "Saving Copleted. Press any key.";
+                std::getchar();
+            }
+
             break;
         case 2:
             return;

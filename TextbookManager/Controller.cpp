@@ -9,36 +9,26 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/serialization/vector.hpp>
+#include <boost/serialization/shared_ptr.hpp>
 
 Controller::Controller() : certificates_list() {
     
 }
 
+template <typename Container>
+void Controller::ClearList(Container& container) {
+    for (auto& item : container) {
+        item.reset();
+    }
+    container.clear();
+}
+
 void Controller::ClearLists() {
-    for (Textbook* tb : this->textbooks_list) {
-        delete tb;
-    }
-    this->textbooks_list.clear();
-
-    for (Certificate* c : this->certificates_list) {
-        delete c;
-    }
-    this->certificates_list.clear();
-
-    for (Distribution* d : this->distributions_list) {
-        delete d;
-    }
-    this->distributions_list.clear();
-
-    for (DistributionOwner* dio : this->distribution_owners_list) {
-        delete dio;
-    }
-    this->distribution_owners_list.clear();
-
-    for (Author* a : this->authors_list) {
-        delete a;
-    }
-    this->authors_list.clear();
+    this->ClearList(this->textbooks_list);
+    this->ClearList(this->certificates_list);
+    this->ClearList(this->distributions_list);
+    this->ClearList(this->distribution_owners_list);
+    this->ClearList(this->authors_list);
 }
 
 Controller::~Controller() {
@@ -46,35 +36,40 @@ Controller::~Controller() {
 }
 
 void Controller::createNewElement(const std::string& element) {
-    if(element == "Distribution Owner")
-        this->distribution_owners_list.push_back(new DistributionOwner(5));
-    else if (element == "Author")
-        this->authors_list.push_back(new Author(5));
-    else if (element == "Textbook")
-        this->textbooks_list.push_back(new Textbook(this->authors_list));
-    else if (element == "Distribution")
-        this->distributions_list.push_back(new Distribution(this->textbooks_list, this->distribution_owners_list));
-    else if (element == "Order")
-        this->order_list.push_back(new Order(this->distributions_list));
+    if (element == "Distribution Owner") {
+        this->distribution_owners_list.push_back(std::make_shared<DistributionOwner>(1));
+    }
+    else if (element == "Author") {
+        this->authors_list.push_back(std::make_shared<Author>(1));
+    }
+    else if (element == "Textbook") {
+        this->textbooks_list.push_back(std::make_shared<Textbook>(this->authors_list));
+    }
+    else if (element == "Distribution") {
+        this->distributions_list.push_back(std::make_shared<Distribution>(this->textbooks_list, this->distribution_owners_list));
+    }
+    else if (element == "Order") {
+        this->order_list.push_back(std::make_shared<Order>(this->distributions_list));
+    }
 }
 
 void Controller::printAllElements(const std::string& element) {
     std::system("cls");
     if (element == "Distribution Owner")
-        for (DistributionOwner* dio : this->distribution_owners_list)
-            std::cout << *dio << "\n";
+        for (const auto& dio : this->distribution_owners_list)
+            dio->printFullInformation();
     else if (element == "Author")
-        for (Author* a : this->authors_list)
-            std::cout << *a << "\n";
+        for (const auto& a : this->authors_list)
+            a->printFullInformation();
     else if (element == "Textbook")
-        for (Textbook* t : this->textbooks_list)
-            std::cout << *t << "\n";
+        for (const auto& t : this->textbooks_list)
+            t->printFullInformation();
     else if (element == "Distribution")
-        for (Distribution* dis : this->distributions_list)
-            std::cout << *dis << "\n";
+        for (const auto& dis : this->distributions_list)
+            dis->printFullInformation();
     else if (element == "Order")
-        for (Order* o : this->order_list)
-            std::cout << *o << "\n";
+        for (const auto& o : this->order_list)
+            o->printFullInformation();
 }
 
 void Controller::finishOrder() {
@@ -88,7 +83,7 @@ void Controller::finishOrder() {
     this->order_list[index]->calculateFinalPrice();
     std::cout << "The final price is: ";
     std::cout << this->order_list[index]->getFinalPrice() << std::endl;
-    delete this->order_list[index];
+    this->order_list[index].reset();
     this->order_list.erase(this->order_list.begin() + index);
 
 }
@@ -134,8 +129,8 @@ void Controller::saveVectorsToFile() {
 }
 
 template <typename T>
-T Controller::deserializeFromBinaryFile(const std::string& fileName) {
-    T data;
+std::vector<std::shared_ptr<T>> Controller::deserializeFromBinaryFile(const std::string& fileName) {
+    std::vector<std::shared_ptr<T>> data;
     std::ifstream inputFile(fileName, std::ios::binary);
     boost::archive::text_iarchive inputArchive(inputFile);
     inputArchive >> data;
@@ -144,11 +139,11 @@ T Controller::deserializeFromBinaryFile(const std::string& fileName) {
 
 void Controller::loadVectorsFromFile() {
     this->ClearLists();
-    this->authors_list = deserializeFromBinaryFile<std::vector<Author*>>("authors.dat");
-    this->certificates_list = deserializeFromBinaryFile<std::vector<Certificate*>>("certificates.dat");
-    this->distribution_owners_list = deserializeFromBinaryFile<std::vector<DistributionOwner*>>("owners.dat");
-    this->distributions_list = deserializeFromBinaryFile<std::vector<Distribution*>>("distributions.dat");
-    this->textbooks_list = deserializeFromBinaryFile<std::vector<Textbook*>>("textbooks.dat");
-    this->order_list = deserializeFromBinaryFile<std::vector<Order*>>("orders.dat");
+    this->authors_list = deserializeFromBinaryFile<Author>("authors.dat");
+    this->certificates_list = deserializeFromBinaryFile<Certificate>("certificates.dat");
+    this->distribution_owners_list = deserializeFromBinaryFile<DistributionOwner>("owners.dat");
+    this->distributions_list = deserializeFromBinaryFile<Distribution>("distributions.dat");
+    this->textbooks_list = deserializeFromBinaryFile<Textbook>("textbooks.dat");
+    this->order_list = deserializeFromBinaryFile<Order>("orders.dat");
 }
 

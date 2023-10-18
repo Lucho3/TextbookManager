@@ -9,8 +9,8 @@ private:
     std::string name;
     std::string address;
     std::string phone_number;
-    DistributionOwner* owner;
-    std::vector<Textbook*> available_textbooks;
+    std::shared_ptr<DistributionOwner> owner;
+    std::vector<std::shared_ptr<Textbook>> available_textbooks;
 
     friend class boost::serialization::access;
 
@@ -25,19 +25,20 @@ private:
 
 public:
     Distribution();
-    Distribution(std::vector<Textbook*>& list_of_tbs, std::vector<DistributionOwner*>& list_of_owners);
-    Distribution(const std::string& name, DistributionOwner* owner);
+    Distribution(std::vector<std::shared_ptr<Textbook>> list_of_tbs, std::vector<std::shared_ptr<DistributionOwner>> list_of_owners);
+    Distribution(const std::string& name, std::shared_ptr<DistributionOwner> owner);
     ~Distribution();
     const std::string& getAddress() const;
     const std::string& getPhoneNumber() const;
     const std::string& getName() const;
-    DistributionOwner* getOwner();
+    std::shared_ptr<DistributionOwner> getOwner();
     void setName();
     void setAddress();
     void setPhoneNumber();
-    void setOwner(std::vector<DistributionOwner*>& list_of_owners);
-    std::vector<Textbook*>& getAvailableTextbooks();
-    void setAvailableTextbooks(std::vector<Textbook*>& list_of_tbs);
+    void setOwner(std::vector<std::shared_ptr<DistributionOwner>>);
+    std::vector<std::shared_ptr<Textbook>> getAvailableTextbooks();
+    void setAvailableTextbooks(std::vector<std::shared_ptr<Textbook>>);
+    void printFullInformation() const;
     std::ostream& print(std::ostream& os) const override;
 };
 

@@ -40,6 +40,16 @@ void DistributionOwner::setDaysOwner() {
 	this->days_owner = getIntCommon("number days ownership");
 }
 
+void DistributionOwner::printFullInformation() const {
+	std::cout << "Owner Information:" << std::endl;
+	std::cout << "Name: " << this->getName() << std::endl;
+	std::cout << "Gender: " << this->getGender() << std::endl;
+	std::cout << "Age: " << this->getAge() << " years" << std::endl;
+	std::cout << "Days as Owner: " << this->getDaysOwner() << " days" << std::endl;
+	std::cout << "Salary: $" << this->getSalary() << std::endl;
+	std::cout << std::endl;
+}
+
 std::ostream& DistributionOwner::print(std::ostream& os) const {
 	os << "Name: " << this->getName() << ", Days Owner: " << this->days_owner << std::endl;
 	return os;
