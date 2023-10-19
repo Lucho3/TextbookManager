@@ -28,7 +28,7 @@ const std::string& Order::getDate() const {
 
 void Order::setDate() {
     std::system("cls");
-    this->date = getDateCommon("the date of the orderin format DD:MM:YYYY");
+    this->date = Common::getDateCommon("the date of the orderin format DD:MM:YYYY");
 }
 
 std::shared_ptr<Distribution> Order::getDistribution() {
@@ -45,7 +45,7 @@ void Order::setDistribution(std::vector<std::shared_ptr<Distribution>> list_of_d
             std::cout << "Name: " << list_of_distributions[i]->getName();
         }
         std::cout << std::endl;
-        this->distribution = list_of_distributions[getIntCommon("the index of the distribution that you want")];
+        this->distribution = list_of_distributions[Common::getIntCommon("the index of the distribution that you want")];
     }
 }
 
@@ -66,30 +66,7 @@ void Order::calculateFinalPrice() {
 }
 
 void Order::addTextbooksToOrder(std::vector<std::shared_ptr<Textbook>> list_of_tbs) {
-    //really raw should be fixed prob
-    std::system("cls");
-    int len_of_cert = list_of_tbs.size();
-    if (len_of_cert) {
-
-        for (int i = 0; i < len_of_cert; ++i) {
-            std::cout << "Index: " << i << std::endl;
-            std::cout << *list_of_tbs[i];
-        }
-        std::cout << "Enter the indexes of the TB that you want separated by ', ': ";
-        std::string input;
-        std::getline(std::cin, input);
-        std::vector<int> indexes;
-        std::string token;
-        std::stringstream ss(input);
-        while (std::getline(ss, token, ',')) {
-            int number = std::stoi(token);
-            indexes.push_back(number);
-        }
-
-        for (int index : indexes) {
-            this->textbooks_to_buy.push_back(list_of_tbs[index]);
-        }
-    }
+    Common::fillListBySelection(list_of_tbs, this->textbooks_to_buy);
 }
 
 void Order::printFullInformation() const {

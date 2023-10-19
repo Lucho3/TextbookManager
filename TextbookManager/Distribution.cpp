@@ -33,7 +33,7 @@ const std::string& Distribution::getAddress() const {
 
 void Distribution::setAddress() {
     std::system("cls");
-    this->address = getStringCommon("the address");
+    this->address = Common::getStringCommon("the address");
 }
 
 const std::string& Distribution::getPhoneNumber() const {
@@ -42,7 +42,7 @@ const std::string& Distribution::getPhoneNumber() const {
 
 void Distribution::setPhoneNumber() {
     std::system("cls");
-    this->phone_number = getStringCommon("the phone number");
+    this->phone_number = Common::getStringCommon("the phone number");
 }
 
 std::shared_ptr<DistributionOwner> Distribution::getOwner() {
@@ -69,7 +69,7 @@ void Distribution::setOwner(std::vector<std::shared_ptr<DistributionOwner>> list
             }
             getline(std::cin, input);
             counter++;
-        } while (!(tryParseInt(input, index)));
+        } while (!(Common::tryParseInt(input, index)));
         this->owner = list_of_owners[index];
     }
 }
@@ -83,34 +83,12 @@ std::vector<std::shared_ptr<Textbook>> Distribution::getAvailableTextbooks() {
 }
 
 void Distribution::setAvailableTextbooks(std::vector<std::shared_ptr<Textbook>> list_of_tbs) {
-    //really raw should be fixed prob
-    std::system("cls");
-    int len_of_cert = list_of_tbs.size();
-    if (len_of_cert) {
-        for (int i = 0; i < len_of_cert; ++i) {
-            std::cout << "Index: " << i << std::endl;
-            std::cout << "Title: " << list_of_tbs[i]->getTitle() << std::endl;
-        }
-        std::cout << "Enter the indexes of the TB that you want separated by ', ': ";
-        std::string input;
-        std::getline(std::cin, input);
-        std::vector<int> indexes;
-        std::string token;
-        std::stringstream ss(input);
-        while (std::getline(ss, token, ',')) {
-            int number = std::stoi(token);
-            indexes.push_back(number);
-        }
-
-        for (int index : indexes) {
-            this->available_textbooks.push_back(list_of_tbs[index]);
-        }
-    }
+    Common::fillListBySelection(list_of_tbs, this->available_textbooks);
 }
 
 void Distribution::setName() {
     std::system("cls");
-    this->name = getStringCommon("the name");
+    this->name = Common::getStringCommon("the name");
 }
 
 void Distribution::printFullInformation() const {

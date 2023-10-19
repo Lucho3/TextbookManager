@@ -24,7 +24,7 @@ const std::string& Author::getGuild() const {
 
 void Author::setGuild() {
 	std::system("cls");
-	this->guild = getStringCommon("the guild");
+	this->guild = Common::getStringCommon("the guild");
 }
 
 const int Author::getNumberOfTbPublished() const {
@@ -33,7 +33,7 @@ const int Author::getNumberOfTbPublished() const {
 
 void Author::setNumberOfTbPublished() {
 	std::system("cls");
-	this->number_of_tb_published = getIntCommon("the number of published TB");
+	this->number_of_tb_published = Common::getIntCommon("the number of published TB");
 }
 
 void Author::printFullInformation() const {

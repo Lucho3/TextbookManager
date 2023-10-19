@@ -8,7 +8,7 @@ Menu::Menu()  {
 }
 
 Menu::~Menu() {
-    delete this->ctrl;
+    this->ctrl.reset();
 }
 
 void Menu::setChosenOption(int number) {
@@ -20,7 +20,7 @@ const double Menu::getChosenOpion() const {
 }
 
 void Menu::createController()  {
-    this->ctrl = new Controller();
+    this->ctrl = std::make_shared<Controller>();
 }
 
 const int Menu::setElementMenu(const std::string element) const {
@@ -42,7 +42,7 @@ const int Menu::setElementMenu(const std::string element) const {
         std::cout << "2. Go Back.\n";
     }
 
-    return getIntCommon("your choice");
+    return Common::getIntCommon("your choice");
 }
 
 void Menu::startTextbookMenu(const std::string element) {
@@ -123,7 +123,7 @@ void Menu::setGlobalMenu() {
     std::cout << "1. File actions\n";
     std::cout << "2. Exit\n";
 
-    this->chosen_option = getIntCommon("your choice");
+    this->chosen_option = Common::getIntCommon("your choice");
 }
 
 void Menu::startTheMainApp() {
@@ -155,7 +155,7 @@ const int Menu::setUserMenu() const{
     std::cout << "4. Element menu for order.\n";
     std::cout << "5. Go Back.\n";
 
-    return getIntCommon("your choice");
+    return Common::getIntCommon("your choice");
 }
 
 void Menu::startUserControlledInputMenu() {
@@ -191,7 +191,7 @@ const int Menu::setFileMenu() const {
     std::cout << "1. Save To Files " << std::endl;
     std::cout << "2. Go Back.\n";
 
-    return getIntCommon("your choice");
+    return Common::getIntCommon("your choice");
 }
 
 const int Menu::popUp() const {
@@ -202,7 +202,7 @@ const int Menu::popUp() const {
     std::cout << "0. No" << std::endl;
     std::cout << "1. Yes" << std::endl;
 
-    return getIntCommon("your choice");
+    return Common::getIntCommon("your choice");
 }
 
 void Menu::startFileControlledInputMenu() {

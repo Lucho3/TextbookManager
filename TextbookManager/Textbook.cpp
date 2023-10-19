@@ -9,7 +9,7 @@ Textbook::Textbook() {
 
 }
 
-Textbook::Textbook(std::vector<std::shared_ptr<Author>>) {
+Textbook::Textbook(std::vector<std::shared_ptr<Author>> authors) {
 	this->setTitle();
 	this->setReleaseDate();
 	this->setPrice();
@@ -41,7 +41,7 @@ const std::string& Textbook::getTitle() const {
 
 void Textbook::setTitle() {
 	std::system("cls");
-	this->title = getStringCommon("the title");
+	this->title = Common::getStringCommon("the title");
 }
 
 const int Textbook::getIssue() const {
@@ -50,7 +50,7 @@ const int Textbook::getIssue() const {
 
 void Textbook::setIssue() {
 	std::system("cls");
-	this->issue = getIntCommon("the issue");
+	this->issue = Common::getIntCommon("the issue");
 }
 
 
@@ -92,7 +92,7 @@ const int Textbook::getCirculation() const {
 
 void Textbook::setCirculation() {
 	std::system("cls");
-	this->circulation = getIntCommon("the circulation");
+	this->circulation = Common::getIntCommon("the circulation");
 }
 
 const double Textbook::getPrice() const {
@@ -101,7 +101,7 @@ const double Textbook::getPrice() const {
 
 void Textbook::setPrice() {
 	std::system("cls");
-	this->price = getDoubleCommon("the price");
+	this->price = Common::getDoubleCommon("the price");
 }
 
 const std::string& Textbook::getReleaseDate() const {
@@ -110,7 +110,7 @@ const std::string& Textbook::getReleaseDate() const {
 
 void Textbook::setReleaseDate() {
 	std::system("cls");
-	this->release_date = getDateCommon("the release date in format DD:MM:YYYY");
+	this->release_date = Common::getDateCommon("the release date in format DD:MM:YYYY");
 }
 
 std::vector<std::shared_ptr<Author>> Textbook::getAuthors() {
@@ -118,29 +118,7 @@ std::vector<std::shared_ptr<Author>> Textbook::getAuthors() {
 }
 
 void Textbook::setAuthors(std::vector<std::shared_ptr<Author>> authors) {
-	//really raw should be fixed prob
-	std::system("cls");
-	int len_of_cert = authors.size();
-	if (len_of_cert) {
-		for (int i = 0; i < len_of_cert; ++i) {
-			std::cout << "Index: " << i << std::endl;
-			std::cout << *authors[i];
-		}
-		std::cout << "Enter the indexes of the authors that you want separated by ', ': ";
-		std::string input;
-		std::getline(std::cin, input);
-		std::vector<int> indexes;
-		std::string token;
-		std::stringstream ss(input);
-		while (std::getline(ss, token, ',')) {
-			int number = std::stoi(token);
-			indexes.push_back(number);
-		}
-
-		for (int index : indexes) {
-			this->authors.push_back(authors[index]);
-		}
-	}
+	Common::fillListBySelection(authors, this->authors);
 }
 
 void Textbook::printFullInformation() const {

@@ -8,7 +8,7 @@
 class Menu {
 private:
     int chosen_option;
-    Controller* ctrl;
+    std::shared_ptr<Controller> ctrl;
 
 public:
     Menu();

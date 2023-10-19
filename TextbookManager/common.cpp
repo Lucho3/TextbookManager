@@ -2,16 +2,10 @@
 #include <sstream>
 #include <iostream>
 #include <vector>
-#include "controller.h"
-#include "certificate.h"
 #include "author.h"
-#include "distribution_owner.h"
-#include "distribution.h"
 #include "textbook.h"
-#include "common.h"
 
-
-bool checkDelimiter(std::istream& stream, char expectedDelimiter) {
+bool Common::checkDelimiter(std::istream& stream, char expectedDelimiter) {
 	char delimiter;
 	if (!(stream >> delimiter) || delimiter != expectedDelimiter) {
 		return false;
@@ -19,7 +13,7 @@ bool checkDelimiter(std::istream& stream, char expectedDelimiter) {
 	return true;
 }
 
-bool isValidDate(std::string& dateStr) {
+bool Common::isValidDate(std::string& dateStr) {
 	int day, month, year;
 	char delimiter;
 	std::istringstream date_stream(dateStr);
@@ -42,7 +36,7 @@ bool isValidDate(std::string& dateStr) {
 	return true;
 }
 
-bool tryParseInt(const std::string& str, int& result) {
+bool Common::tryParseInt(const std::string& str, int& result) {
 	try {
 		result = std::stoi(str);
 		return true;
@@ -55,7 +49,7 @@ bool tryParseInt(const std::string& str, int& result) {
 	}
 }
 
-bool tryParseDouble(const std::string& str, double& result) {
+bool Common::tryParseDouble(const std::string& str, double& result) {
 	try {
 		result = std::stod(str);
 		return true;
@@ -68,7 +62,7 @@ bool tryParseDouble(const std::string& str, double& result) {
 	}
 }
 
-const int getIntCommon(const std::string& prompt) {
+const int Common::getIntCommon(const std::string& prompt) {
 	std::cout << "Please enter " << prompt <<": ";
 	std::string option;
 	int counter = 0;
@@ -80,12 +74,12 @@ const int getIntCommon(const std::string& prompt) {
 		}
 		getline(std::cin, option);
 		counter++;
-	} while (!(tryParseInt(option, chosen)));
+	} while (!(tryParseInt(option, chosen) && chosen>=0));
 
 	return chosen;
 }
 
-const double getDoubleCommon(const std::string& prompt) {
+const double Common::getDoubleCommon(const std::string & prompt) {
 	std::cout << "Please enter " << prompt << ": ";
 	std::string option;
 	int counter = 0;
@@ -97,12 +91,12 @@ const double getDoubleCommon(const std::string& prompt) {
 		}
 		getline(std::cin, option);
 		counter++;
-	} while (!(tryParseDouble(option, chosen)));
+	} while (!(tryParseDouble(option, chosen) && chosen >= 0));
 
 	return chosen;
 }
 
-const std::string getStringCommon(const std::string& prompt) {
+const std::string Common::getStringCommon(const std::string& prompt) {
 	std::cout << "Please enter " << prompt << ": ";
 	std::string new_value;
 	int counter = 0;
@@ -118,7 +112,7 @@ const std::string getStringCommon(const std::string& prompt) {
 	return new_value;
 }
 
-const std::string getDateCommon(const std::string& prompt) {
+const std::string Common::getDateCommon(const std::string& prompt) {
 	std::cout << "Please enter " << prompt << ": ";
 	std::string new_date;
 	int counter = 0;
@@ -134,3 +128,37 @@ const std::string getDateCommon(const std::string& prompt) {
 	return new_date;
 }
 
+
+
+template <typename T>
+void Common::fillListBySelection(std::vector<std::shared_ptr<T>> selection_list, std::vector<std::shared_ptr<T>>& items_to_fill) {
+	std::system("cls");
+	int len_of_cert = selection_list.size();
+	if (len_of_cert) {
+		for (int i = 0; i < len_of_cert; ++i) {
+			std::cout << "Index: " << i << std::endl;
+			std::cout << *selection_list[i] << std::endl;
+		}
+		std::cout << "Enter the indexes that you want separated by ', ': ";
+		std::string input;
+		std::getline(std::cin, input);
+
+		std::vector<int> indexes;
+		std::string token;
+		std::stringstream ss(input);
+		while (std::getline(ss, token, ',')) {
+			int number = std::stoi(token);
+			indexes.push_back(number);
+		}
+
+		for (int index : indexes) {
+			if (index >= 0 && index < len_of_cert)
+				items_to_fill.push_back(selection_list[index]);
+			else
+				std::cout << "Wrong index!";
+		}
+	}
+}
+
+template void Common::fillListBySelection<Author>(std::vector<std::shared_ptr<Author>> selection_list, std::vector<std::shared_ptr<Author>>& items_to_fill);
+template void Common::fillListBySelection<Textbook>(std::vector<std::shared_ptr<Textbook>> selection_list, std::vector<std::shared_ptr<Textbook>>& items_to_fill);

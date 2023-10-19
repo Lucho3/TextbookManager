@@ -28,7 +28,7 @@ const double DistributionOwner::getSalary() const {
 
 void DistributionOwner::setSalary() {
 	std::system("cls");
-	this->salary = getDoubleCommon("enter the salary");
+	this->salary = Common::getDoubleCommon("enter the salary");
 }
 
 const int DistributionOwner::getDaysOwner() const {
@@ -37,7 +37,7 @@ const int DistributionOwner::getDaysOwner() const {
 
 void DistributionOwner::setDaysOwner() {
 	std::system("cls");
-	this->days_owner = getIntCommon("number days ownership");
+	this->days_owner = Common::getIntCommon("number days ownership");
 }
 
 void DistributionOwner::printFullInformation() const {

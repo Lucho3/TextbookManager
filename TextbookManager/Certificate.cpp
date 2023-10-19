@@ -26,7 +26,7 @@ const std::string& Certificate::getName() const {
 
 void Certificate::setName() {
 	std::system("cls");
-	this->name = getStringCommon("the name of the certificate");
+	this->name = Common::getStringCommon("the name of the certificate");
 }
 
 const std::string& Certificate::getAssigner() const {
@@ -35,7 +35,7 @@ const std::string& Certificate::getAssigner() const {
 
 void Certificate::setAssigner() {
 	std::system("cls");
-	this->assigner = getStringCommon("the name the name of the company assigner");
+	this->assigner = Common::getStringCommon("the name the name of the company assigner");
 }
 
 const std::string& Certificate::getDate() const {
@@ -44,7 +44,7 @@ const std::string& Certificate::getDate() const {
 
 void Certificate::setDate() {
 	std::system("cls");
-	this->date_earned = getDateCommon("the date in format DD:MM:YYYY");
+	this->date_earned = Common::getDateCommon("the date in format DD:MM:YYYY");
 }
 
 void Certificate::printFullInformation() const {

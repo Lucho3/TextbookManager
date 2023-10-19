@@ -20,7 +20,7 @@ const std::string& Person::getName() const {
 
 void Person::setName() {
 	std::system("cls");
-	this->name = getStringCommon("the name of the person");
+	this->name = Common::getStringCommon("the name of the person");
 }
 
 
@@ -31,7 +31,7 @@ const int Person::getAge() const {
 
 void Person::setAge() {
 	std::system("cls");
-	this->age = getIntCommon("the age of the person");
+	this->age = Common::getIntCommon("the age of the person");
 }
 
 const std::string& Person::getGender() const {

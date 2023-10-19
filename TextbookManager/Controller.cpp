@@ -11,8 +11,7 @@
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/shared_ptr.hpp>
 
-Controller::Controller() : certificates_list() {
-    
+Controller::Controller() {
 }
 
 template <typename Container>
@@ -79,7 +78,7 @@ void Controller::finishOrder() {
         std::cout << *this->order_list[i];
     }
     std::cout << std::endl;
-    int index = getIntCommon("your choice");
+    int index = Common::getIntCommon("your choice");
     this->order_list[index]->calculateFinalPrice();
     std::cout << "The final price is: ";
     std::cout << this->order_list[index]->getFinalPrice() << std::endl;
@@ -96,7 +95,7 @@ void Controller::addTextBookToOrder() {
         std::cout << "Name of the distribution: " << this->order_list[i]->getDistribution()->getName() << std::endl;;
     }
 
-    int index = getIntCommon("your choice");
+    int index = Common::getIntCommon("your choice");
     std::cout << std::endl;
     this->order_list[index]->addTextbooksToOrder(this->order_list[index]->getDistribution()->getAvailableTextbooks());
 }
@@ -108,7 +107,7 @@ void Controller::addCertificteToTextbook() {
         std::cout << "Textbook title:" << this->textbooks_list[i]->getTitle() << std::endl;
     }
 
-    int index = getIntCommon("your choice");
+    int index = Common::getIntCommon("your choice");
     this->textbooks_list[index]->setCertificate();
 }
 
