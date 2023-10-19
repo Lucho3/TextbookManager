@@ -3,7 +3,9 @@
 
 #include <string>
 
-bool isValidNumber(const std::string& dateStr);
-
+class DistributionHelper {
+public:
+	static bool isValidNumber(const std::string&);
+};
 
 #endif

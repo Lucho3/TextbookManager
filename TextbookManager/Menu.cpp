@@ -209,6 +209,7 @@ void Menu::startFileControlledInputMenu() {
     while (true) {
         switch (setFileMenu()) {
         case 0:
+            std::system("cls");
             if (this->popUp()) {
                 std::system("cls");
                 this->ctrl->loadVectorsFromFile();
@@ -219,6 +220,7 @@ void Menu::startFileControlledInputMenu() {
         case 1:
             std::system("cls");
             if (this->popUp()) {
+                std::system("cls");
                 this->ctrl->saveVectorsToFile();
                 std::cout << "Saving Copleted. Press any key.";
                 std::getchar();

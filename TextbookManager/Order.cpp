@@ -36,13 +36,13 @@ std::shared_ptr<Distribution> Order::getDistribution() {
 }
 
 void Order::setDistribution(std::vector<std::shared_ptr<Distribution>> list_of_distributions) {
-    //really raw should be fixed prob
     std::system("cls");
     int len_of_cert = list_of_distributions.size();
     if (len_of_cert) {
         for (int i = 0; i < len_of_cert; ++i) {
             std::cout << "Index: " << i << std::endl;
-            std::cout << "Name: " << list_of_distributions[i]->getName();
+            std::cout << "Name: " << list_of_distributions[i]->getName() << std::endl;
+            std::cout << std::endl;
         }
         std::cout << std::endl;
         this->distribution = list_of_distributions[Common::getIntCommon("the index of the distribution that you want")];

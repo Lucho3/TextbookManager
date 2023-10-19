@@ -76,6 +76,7 @@ void Controller::finishOrder() {
     for (int i = 0; i < this->order_list.size(); ++i) {
         std::cout << "Index: " << i << std::endl;
         std::cout << *this->order_list[i];
+        std::cout << std::endl;
     }
     std::cout << std::endl;
     int index = Common::getIntCommon("your choice");
@@ -105,6 +106,7 @@ void Controller::addCertificteToTextbook() {
     for (int i = 0; i < this->textbooks_list.size(); ++i) {
         std::cout << "Index: " << i << std::endl;
         std::cout << "Textbook title:" << this->textbooks_list[i]->getTitle() << std::endl;
+        std::cout << std::endl;
     }
 
     int index = Common::getIntCommon("your choice");

@@ -58,7 +58,6 @@ const std::string& Textbook::getISBN() const {
 	return this->ISBN;
 }
 
-//doesnt work should be fixed
 void Textbook::setISBN() 
 {
 	std::system("cls");
@@ -73,9 +72,9 @@ void Textbook::setISBN()
 		}
 		std::getline(std::cin, new_ISBN);
 		if (new_ISBN.length() == 10)
-			validateFunction = isValidISBN10;
+			validateFunction = TextbookHelper::isValidISBN10;
 		else if (new_ISBN.length() == 13)
-			validateFunction = isValidISBN13;
+			validateFunction = TextbookHelper::isValidISBN13;
 		else {
 			validateFunction = [](const std::string& str) -> bool {
 				return false;

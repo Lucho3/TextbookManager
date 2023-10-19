@@ -43,6 +43,9 @@ const std::string& Distribution::getPhoneNumber() const {
 void Distribution::setPhoneNumber() {
     std::system("cls");
     this->phone_number = Common::getStringCommon("the phone number");
+    while (!DistributionHelper::isValidNumber(this->phone_number)) {
+        this->phone_number = Common::getStringCommon("the phone number");
+    }
 }
 
 std::shared_ptr<DistributionOwner> Distribution::getOwner() {
@@ -50,27 +53,16 @@ std::shared_ptr<DistributionOwner> Distribution::getOwner() {
 }
 
 void Distribution::setOwner(std::vector<std::shared_ptr<DistributionOwner>> list_of_owners) {
-    //really raw should be fixed prob
     std::system("cls");
     int len_of_cert = list_of_owners.size();
     if (len_of_cert) {
         for (int i = 0; i < len_of_cert ; ++i) {
             std::cout << "Index: " << i << std::endl;
-            std::cout << *list_of_owners[i];
-        }
-        std::cout << "Enter the index of the owner that you want: ";
-        std::string input;
-        int index;
-        int counter = 0;
-        do {
-            if (counter > 0) {
-                std::system("cls");
-                std::cout << "Please reenter the index wrong value: ";
-            }
-            getline(std::cin, input);
-            counter++;
-        } while (!(Common::tryParseInt(input, index)));
-        this->owner = list_of_owners[index];
+            std::cout << *list_of_owners[i] << std::endl;
+            std::cout << std::endl;
+        }  
+        std::cout << std::endl;
+        this->owner = list_of_owners[Common::getIntCommon("the index of the owner that you want")];
     }
 }
 

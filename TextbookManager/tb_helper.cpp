@@ -1,7 +1,7 @@
 #include <regex>
 #include "tb_helper.h"
 
-bool isValidISBN10(const std::string& isbn) {
+bool TextbookHelper::isValidISBN10(const std::string& isbn) {
 	if (isbn.size() != 10) {
 		return false;
 	}
@@ -22,7 +22,7 @@ bool isValidISBN10(const std::string& isbn) {
 	return (checksum % 11 == 0);
 }
 
-bool isValidISBN13(const std::string& isbn) {
+bool TextbookHelper::isValidISBN13(const std::string& isbn) {
 	if (isbn.size() != 13 || !std::regex_match(isbn, std::regex(R"(\d{13})"))) {
 		return false;
 	}

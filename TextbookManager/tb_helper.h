@@ -3,7 +3,10 @@
 
 #include <string>
 
-bool isValidISBN10(const std::string& isbn);
-bool isValidISBN13(const std::string& isbn);
+class TextbookHelper {
+public:
+	static bool isValidISBN10(const std::string&);
+	static bool isValidISBN13(const std::string&);
+};
 
 #endif
