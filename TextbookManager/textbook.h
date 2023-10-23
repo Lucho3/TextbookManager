@@ -15,6 +15,7 @@ private:
 	int circulation;
 	std::vector<std::shared_ptr<Certificate>> certificates;
 	double price;
+	std::ostream& print(std::ostream&) const override;
 
 	friend class boost::serialization::access;
 
@@ -51,6 +52,5 @@ public:
 	const double getPrice() const;
 	void setPrice();
 	void printFullInformation() const;
-	std::ostream& print(std::ostream& os) const override;
 };
 #endif

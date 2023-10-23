@@ -45,7 +45,9 @@ void Order::setDistribution(std::vector<std::shared_ptr<Distribution>> list_of_d
             std::cout << std::endl;
         }
         std::cout << std::endl;
-        this->distribution = list_of_distributions[Common::getIntCommon("the index of the distribution that you want")];
+        int index = Common::getIntCommon("the index of the distribution that you want");
+        if (index >= 0 && index < len_of_cert)
+            this->distribution = list_of_distributions[index];
     }
 }
 

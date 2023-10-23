@@ -62,7 +62,9 @@ void Distribution::setOwner(std::vector<std::shared_ptr<DistributionOwner>> list
             std::cout << std::endl;
         }  
         std::cout << std::endl;
-        this->owner = list_of_owners[Common::getIntCommon("the index of the owner that you want")];
+        int index = Common::getIntCommon("the index of the owner that you want");
+        if (index >= 0 && index < len_of_cert)
+            this->owner = list_of_owners[index];
     }
 }
 
@@ -111,7 +113,7 @@ std::ostream& Distribution::print(std::ostream& os) const {
     os << "Available Textbooks:\n";
 
     for (const auto& textbook : available_textbooks) {;
-        textbook->print(os);
+    std::cout << *textbook;
         os << std::endl;
     }
     return os;

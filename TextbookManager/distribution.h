@@ -11,6 +11,7 @@ private:
     std::string phone_number;
     std::shared_ptr<DistributionOwner> owner;
     std::vector<std::shared_ptr<Textbook>> available_textbooks;
+    std::ostream& print(std::ostream&) const override;
 
     friend class boost::serialization::access;
 
@@ -39,7 +40,6 @@ public:
     std::vector<std::shared_ptr<Textbook>> getAvailableTextbooks();
     void setAvailableTextbooks(std::vector<std::shared_ptr<Textbook>>);
     void printFullInformation() const;
-    std::ostream& print(std::ostream& os) const override;
 };
 
 #endif

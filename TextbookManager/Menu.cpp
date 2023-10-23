@@ -11,14 +11,6 @@ Menu::~Menu() {
     this->ctrl.reset();
 }
 
-void Menu::setChosenOption(int number) {
-    this->chosen_option = number;
-}
-
-const double Menu::getChosenOpion() const {
-    return chosen_option;
-}
-
 void Menu::createController()  {
     this->ctrl = std::make_shared<Controller>();
 }
@@ -116,21 +108,20 @@ void Menu::startElementMenu(const std::string element) {
     }
 }
 
-void Menu::setGlobalMenu() {
+const int Menu::setGlobalMenu() const{
     std::system("cls");
     std::cout << "Manin Menu:\n";
     std::cout << "0. User controlled inputs.\n";
     std::cout << "1. File actions\n";
     std::cout << "2. Exit\n";
 
-    this->chosen_option = Common::getIntCommon("your choice");
+    return Common::getIntCommon("your choice");
 }
 
 void Menu::startTheMainApp() {
     this->createController();
     while (true) {
-        this->setGlobalMenu();
-        switch (this->chosen_option) {
+        switch (this->setGlobalMenu()) {
         case 0:
             this->startUserControlledInputMenu();
             break;

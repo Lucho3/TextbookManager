@@ -10,6 +10,7 @@ private:
     std::vector<std::shared_ptr<Textbook>> textbooks_to_buy;
     std::shared_ptr<Distribution> distribution;
     double final_price;
+    std::ostream& print(std::ostream&Ñ) const override;
 
     friend class boost::serialization::access;
 
@@ -34,7 +35,6 @@ public:
     void calculateFinalPrice();
     void addTextbooksToOrder(std::vector<std::shared_ptr<Textbook>> list_of_tbs);
     void printFullInformation() const;
-    std::ostream& print(std::ostream& os) const override;
 };
 
 #endif

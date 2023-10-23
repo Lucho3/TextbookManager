@@ -7,6 +7,7 @@ class DistributionOwner : public Person {
 private:
     double salary;
     int days_owner;
+    std::ostream& print(std::ostream&) const override;
 
     friend class boost::serialization::access;
 
@@ -27,7 +28,6 @@ public:
     void setDaysOwner();
     void setSalary();
     void printFullInformation() const;
-    std::ostream& print(std::ostream& os) const override;
 };
 
 #endif

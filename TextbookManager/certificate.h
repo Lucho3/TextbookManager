@@ -8,6 +8,7 @@ private:
 	std::string name;
 	std::string assigner;
 	std::string date_earned;
+	std::ostream& print(std::ostream&) const override;
 
 	friend class boost::serialization::access;
 
@@ -29,6 +30,5 @@ public:
 	const std::string& getDate() const;
 	void setDate();
 	void printFullInformation() const;
-	std::ostream& print(std::ostream& os) const override;
 };
 #endif

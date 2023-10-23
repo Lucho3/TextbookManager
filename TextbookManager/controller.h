@@ -20,7 +20,10 @@ private:
     std::vector<std::shared_ptr<Order>> order_list;
     template <typename Container>
     void ClearList(Container&);
-
+    template <typename T>
+    void serializeToBinaryFile(const std::string&, const T&);
+    template <typename T>
+    std::vector<std::shared_ptr<T>> deserializeFromBinaryFile(const std::string&);
 public:
     Controller();
     ~Controller();
@@ -32,10 +35,6 @@ public:
     void saveVectorsToFile();
     void loadVectorsFromFile();
     void ClearLists();
-    template <typename T>
-    void serializeToBinaryFile(const std::string&, const T&);
-    template <typename T>
-    std::vector<std::shared_ptr<T>> deserializeFromBinaryFile(const std::string&);
 };
 
 #endif

@@ -17,7 +17,6 @@ private:
         ar& this->number_of_tb_published;
         ar& this->guild;
     }
-
 public:
     Author();
     Author(int);
@@ -27,7 +26,6 @@ public:
     void setGuild();
     void setNumberOfTbPublished();
     void printFullInformation() const;
-
 };
 
 

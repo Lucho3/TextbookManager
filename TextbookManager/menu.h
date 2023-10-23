@@ -7,16 +7,13 @@
 
 class Menu {
 private:
-    int chosen_option;
     std::shared_ptr<Controller> ctrl;
 
 public:
     Menu();
     ~Menu();
     void createController();
-    void setChosenOption(int number);
-    const double getChosenOpion() const;
-    void setGlobalMenu();
+    const int setGlobalMenu() const;
     const int setUserMenu() const;
     const int setElementMenu(const std::string element) const;
     const int setFileMenu() const;
